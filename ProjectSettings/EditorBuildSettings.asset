@@ -6,12 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 0
-    path: Assets/Scenes/SampleScene.unity
+    path: Assets/BrickBreaker/Scenes/BrickBreaker.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Apple_catcher/Title.unity
+    path: Assets/AppleCatcher/Scenes/Apple_catcher/Title.unity
     guid: 9a051a4c5c9458a409e108653256897d
   - enabled: 1
-    path: Assets/Scenes/Apple_catcher/Game.unity
+    path: Assets/AppleCatcher/Scenes/Apple_catcher/Game.unity
     guid: a01c231473abd9f4d87ece2c71542729
   m_configObjects: {}
