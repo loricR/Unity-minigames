@@ -8,8 +8,9 @@ public class Ball : MonoBehaviour
     const float LAUNCH_SPEED = -10f;
     const float TIME_SPAWN = 2f;
     const int PUISSANCE_DEVIATION = 3;
+    const int LOST_SCORE = 500;
     const float BALL_Y = -4f;
-    const float GRAVITY = 0.05f;
+    const float GRAVITY = 0.01f;
     protected Rigidbody2D rigidbody;
     [HideInInspector] public Master master_Script;
     protected AudioSource sound;
@@ -30,13 +31,18 @@ public class Ball : MonoBehaviour
         {
             sound.clip = clip[2];
             sound.Play();
-            int newScore = master_Script.score - 50;
-            if (newScore >= 0)
+            int newScore = master_Script.score - LOST_SCORE;
+            if (newScore <= 0)
+            {
+                master_Script.score = 0;
+                master_Script.displayedScore.SetText("Score : " + master_Script.score);
+            }
+            else
             {
                 master_Script.score = newScore;
                 master_Script.displayedScore.SetText("Score : " + master_Script.score);
             }
-            
+            //Invoke("CallSpawn", 2f);
             StartCoroutine(Spawn());
         }
     }
