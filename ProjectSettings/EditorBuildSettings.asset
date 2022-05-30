@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/BrickBreaker/Scenes/BrickBreaker.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/AppleCatcher/Scenes/Apple_catcher/Game.unity
     guid: a01c231473abd9f4d87ece2c71542729
+  - enabled: 1
+    path: Assets/MainMenu/Scene/MainMenu.unity
+    guid: 4ace4216f4a4b1b4ea862f6c4f05ea2b
   m_configObjects: {}
