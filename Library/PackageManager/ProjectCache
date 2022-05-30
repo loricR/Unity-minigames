@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637891933744134742
-    m_Hash: 4089505294
+      ticks: 637892584860000000
+    m_Hash: 1961831218
   m_LockFileStatus:
     m_FilePath: E:/Documents/1-Travail/Unity/git_projet3/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637891933744144719
-    m_Hash: 3625364141
+      ticks: 637892584860000000
+    m_Hash: 2642814715
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -126,6 +126,7 @@ m_PackageAssets:
         - 7.0.3
         - 7.0.4
         - 7.0.5
+        - 7.0.6
         - 8.0.0-pre.3
         - 8.0.0-pre.4
         - 8.0.0
