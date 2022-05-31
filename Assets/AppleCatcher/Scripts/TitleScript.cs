@@ -14,7 +14,7 @@ public class TitleScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && !Input.GetKey(KeyCode.Mouse0))
         {
             StartCoroutine(LoadScene_Game());
         }

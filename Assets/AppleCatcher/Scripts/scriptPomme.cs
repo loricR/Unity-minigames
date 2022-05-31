@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class scriptPomme : MonoBehaviour
 {
+
+    public spawnerScript ref_spawner;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +19,7 @@ public class scriptPomme : MonoBehaviour
     {
         if (gameObject.transform.position.y < -10)
         {
+            ref_spawner.AppleDied();
             Destroy(gameObject);
         }
     }
