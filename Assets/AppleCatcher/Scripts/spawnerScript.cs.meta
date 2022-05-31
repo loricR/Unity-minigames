@@ -6,6 +6,7 @@ MonoImporter:
   defaultReferences:
   - Apple: {fileID: 2520367045975437370, guid: 9aabd66b935dafa4db90f120f878d401, type: 3}
   - musique: {fileID: 8300000, guid: c86450342348a644d9978cc247f477dc, type: 3}
+  - Life: {fileID: 1448632462624798398, guid: fa6cc0e47a05be3408de5698e1bfb668, type: 3}
   executionOrder: 100
   icon: {instanceID: 0}
   userData: 
