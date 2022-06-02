@@ -1,15 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public class spawnerScript : MonoBehaviour
 {
     //Variables liées au timer (temps entre 2 spawn de pomme)
-    private float timer = 1.5f;
+    private float timer = 1;
     private float timer_variable;
 
+    private float time_at_the_end = 3;
+
     public GameObject Apple;
+
+    public GameObject Panier;
 
     //Variables liées à la génération de position aléatoire
     private float randomSign;
@@ -93,10 +98,28 @@ public class spawnerScript : MonoBehaviour
         }
         if (nb_life == 0)
         {
-            Destroy(ref_life1.gameObject);
             gameOver = true;
+            Destroy(ref_life1.gameObject);
+            Panier.GetComponent<scriptPanier>().GamerOver();
+            StartCoroutine("LoadScene_GameOver");
         }
 
     }
+
+
+    IEnumerator LoadScene_GameOver()
+    {
+        yield return new WaitForSeconds(time_at_the_end);
+
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GameOverAC");
+
+        //Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
+
 
 }
