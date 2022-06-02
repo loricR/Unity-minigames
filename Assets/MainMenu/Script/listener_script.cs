@@ -51,4 +51,19 @@ public class listener_script : MonoBehaviour
         }
     }
 
+    public void LoadFurapiBird()
+    {
+        StartCoroutine(LoadScene_FurapiBird());
+    }
+    IEnumerator LoadScene_FurapiBird()
+    {
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("FurapiBird");
+
+        //Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
+
 }

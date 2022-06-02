@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/AppleCatcher/Scenes/Game.unity
+- path: Assets/MainMenu/Scene/MainMenu.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
