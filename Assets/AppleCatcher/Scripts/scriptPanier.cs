@@ -16,6 +16,9 @@ public class scriptPanier : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        displayedText.transform.position = new Vector3(-7, 4.5f, 0);
+        displayedText.transform.localScale = new Vector3(1, 1, 1);
+
         son = GetComponent<AudioSource>();
         son.loop = false;
         son.volume = 0.7f;
@@ -52,6 +55,12 @@ public class scriptPanier : MonoBehaviour
             displayedText.SetText("Score : " + score);
             son.Play();
         }
+    }
+
+    public void GamerOver()
+    {
+        displayedText.transform.position = new Vector3(0, 1, 0);
+        displayedText.transform.localScale = new Vector3(3, 3, 3);
     }
 
 }

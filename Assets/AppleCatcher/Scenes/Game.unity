@@ -216,7 +216,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 388753193}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.06, y: -3.73, z: -0.1}
+  m_LocalPosition: {x: -0.06, y: -3.73, z: 0}
   m_LocalScale: {x: 0.4743, y: 0.4541, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -437,7 +437,7 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 72
   m_fontStyle: 0
-  m_HorizontalAlignment: 1
+  m_HorizontalAlignment: 2
   m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
@@ -532,8 +532,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6.88, y: 4.38}
-  m_SizeDelta: {x: 4.0725, y: 0.9779}
+  m_AnchoredPosition: {x: -7.3945, y: 4.6945}
+  m_SizeDelta: {x: 3.211, y: 0.6109}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &519420028
 GameObject:
@@ -695,7 +695,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1114096755}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.16, y: -0.11, z: 0}
+  m_LocalPosition: {x: 0.16, y: -0.11, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -743,6 +743,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Apple: {fileID: 2520367045975437370, guid: 9aabd66b935dafa4db90f120f878d401, type: 3}
+  Panier: {fileID: 388753193}
   musique: {fileID: 8300000, guid: c86450342348a644d9978cc247f477dc, type: 3}
   Life: {fileID: 1448632462624798398, guid: fa6cc0e47a05be3408de5698e1bfb668, type: 3}
 --- !u!4 &1271608471
