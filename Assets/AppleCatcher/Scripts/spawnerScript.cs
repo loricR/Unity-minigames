@@ -13,7 +13,6 @@ public class spawnerScript : MonoBehaviour
     private float time_at_the_end = 3;
 
     public GameObject Apple;
-
     public GameObject Panier;
 
     //Variables liées à la génération de position aléatoire
