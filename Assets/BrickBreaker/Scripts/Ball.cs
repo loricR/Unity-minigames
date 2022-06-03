@@ -7,9 +7,9 @@ public class Ball : MonoBehaviour
     const float BOTTOM_SCREEN = -12.4f;
     const float LAUNCH_SPEED = -10f;
     const float TIME_SPAWN = 2f;
-    const int PUISSANCE_DEVIATION = 3;
+    const int PUISSANCE_DEVIATION = 100;
+    const float BLOCKED_BOOST = 0.1f;
     const float BALL_Y = -4f;
-    const float GRAVITY = 0.05f;
     protected Rigidbody2D rigidBody;
     [HideInInspector] public Master master_Script;
     protected AudioSource sound;
@@ -26,6 +26,14 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(rigidBody.velocity.y >= 0 && rigidBody.velocity.y <= 0.05)
+        {
+            rigidBody.AddForce(new Vector2(0, BLOCKED_BOOST));
+        }
+        if(rigidBody.velocity.y <= 0 && rigidBody.velocity.y >= -0.05)
+        {
+            rigidBody.AddForce(new Vector2(0, -BLOCKED_BOOST));
+        }
         Debug.Log(rigidBody.velocity);
         if(transform.position.y <= BOTTOM_SCREEN)
         {
@@ -53,10 +61,7 @@ public class Ball : MonoBehaviour
         sound.Play();
         transform.position = new Vector3(0, BALL_Y, 0);
         rigidBody.velocity = new Vector2(0, 0);
-        rigidBody.gravityScale = 0; //Pour que la balle ne tombe pas à cause de la gravité
         yield return new WaitForSeconds(TIME_SPAWN);
-        rigidBody.gravityScale = GRAVITY; //On réactive la gravité pour éviter que la balle se bloque en Y
-                                          //La valeur de la gravité est faible pour ne pas influencer la vitesse de la balle
         rigidBody.velocity = new Vector2(1, LAUNCH_SPEED);
     }
 
@@ -70,7 +75,8 @@ public class Ball : MonoBehaviour
             float paddlePosition = collision.transform.position.x;
             float diffX;
             diffX = ballPosition - paddlePosition;
-            rigidBody.velocity += new Vector2(diffX * PUISSANCE_DEVIATION, 0);
+            //rigidBody.velocity += new Vector2(diffX * PUISSANCE_DEVIATION, 0);
+            rigidBody.AddForce(new Vector2(diffX * PUISSANCE_DEVIATION, 0));
         }
         
         if(collision.gameObject.tag == "wall")
