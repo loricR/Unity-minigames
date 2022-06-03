@@ -12,6 +12,8 @@ public class scriptPanier : MonoBehaviour
     public TextMeshPro displayedText;
     private AudioSource son;
 
+    private Animator ref_animator;
+    private float speed_last_frame = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -22,6 +24,8 @@ public class scriptPanier : MonoBehaviour
         son = GetComponent<AudioSource>();
         son.loop = false;
         son.volume = 0.7f;
+
+        ref_animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,20 +33,38 @@ public class scriptPanier : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.RightArrow))
         {
+            if (speed_last_frame != speed)
+            {
+                ref_animator.SetTrigger("T_walk");
+            }
+            speed_last_frame = speed;
+
             transform.Translate(speed * Time.deltaTime, 0, 0);
             if (gameObject.transform.position.x >= 8)
             {
                 transform.Translate(-speed * Time.deltaTime, 0, 0);
             }
         }
-
-        if (Input.GetKey(KeyCode.LeftArrow))
+        else if (Input.GetKey(KeyCode.LeftArrow))
         {
+            if (speed_last_frame != -speed)
+            {
+                ref_animator.SetTrigger("T_rear");
+            }
+            speed_last_frame = -speed;
             transform.Translate(-speed * Time.deltaTime, 0, 0);
             if (gameObject.transform.position.x <= -8)
             {
                 transform.Translate(speed * Time.deltaTime, 0, 0);
             }
+        }
+        else
+        {
+            if(speed_last_frame != 0)
+            {
+                ref_animator.SetTrigger("T_iddle");
+            }
+            speed_last_frame = 0;
         }
     }
 
