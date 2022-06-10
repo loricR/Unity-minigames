@@ -26,4 +26,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/AppleCatcher/Scenes/GameOverAC.unity
     guid: fab4b5e008e370743822ad0ba3530d32
+  - enabled: 1
+    path: Assets/FurapiBird/Scenes/FB_MainMenu.unity
+    guid: 73a9d34e13f32e64f8fea46f7b55ced5
   m_configObjects: {}

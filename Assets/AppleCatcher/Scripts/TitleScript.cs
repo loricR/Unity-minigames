@@ -43,13 +43,13 @@ public class TitleScript : MonoBehaviour
             ref_audioSource_validate.Play();
 
             StartCoroutine(ChangeSquare());
-            //StartCoroutine(LoadScene_Game());
+            StartCoroutine(LoadScene_Game());
         }
     }
 
     IEnumerator LoadScene_Game()
     {
-        //yield return new WaitUntil(spriteren.color.a == 1);
+        yield return new WaitUntil(() => spriteren.color.a >= 1);
         yield return new WaitUntil(() => ref_audioSource_validate.isPlaying == false);
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("Game");
 
@@ -63,13 +63,14 @@ public class TitleScript : MonoBehaviour
     IEnumerator ChangeSquare()
     {
         float alpha = 0;
-        while(alpha != 1)
+        while(alpha < 1)
         {
             alpha = alpha + 0.1f;
             Vector4 vect = new Vector4(255, 255, 255, alpha);
             spriteren.color = vect;
             yield return new WaitForSeconds(speedSquare);
         }
+        Debug.Log("Transition done");
     }
 
 }
