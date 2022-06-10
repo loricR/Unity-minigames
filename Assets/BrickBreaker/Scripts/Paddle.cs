@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    const float SPEED = 10.0f;
+    const float SPEED = 15.0f;
     const float LIMIT_RIGHT = 12.437f;
     const float LIMIT_LEFT = -12.437f;
     protected AudioSource sound;
@@ -27,16 +27,6 @@ public class Paddle : MonoBehaviour
         {
             transform.Translate(-SPEED * Time.deltaTime, 0, 0);
         }
-
-        //En mettant le paddle en dynamic
-        /*if (Input.GetKey(KeyCode.RightArrow))
-        {
-            transform.Translate(SPEED * Time.deltaTime, 0, 0);
-        }
-        if (Input.GetKey(KeyCode.LeftArrow))
-        {
-            transform.Translate(-SPEED * Time.deltaTime, 0, 0);
-        }*/
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

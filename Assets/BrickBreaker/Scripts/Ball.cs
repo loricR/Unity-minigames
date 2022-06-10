@@ -7,9 +7,9 @@ public class Ball : MonoBehaviour
     const float BOTTOM_SCREEN = -12.4f;
     const float LAUNCH_SPEED = -10f;
     const float TIME_SPAWN = 2f;
-    const int PUISSANCE_DEVIATION = 3;
+    const int PUISSANCE_DEVIATION = 100;
+    const float BLOCKED_BOOST = 0.1f;
     const float BALL_Y = -4f;
-    const float GRAVITY = 0.05f;
     protected Rigidbody2D rgdBody;
     [HideInInspector] public Master master_Script;
     protected AudioSource sound;
@@ -26,19 +26,33 @@ public class Ball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(transform.position.y <= BOTTOM_SCREEN)
+        if (rgdBody.velocity.y >= 0 && rgdBody.velocity.y <= 0.05)
+        {
+            rgdBody.AddForce(new Vector2(0, BLOCKED_BOOST));
+        }
+        if (rgdBody.velocity.y <= 0 && rgdBody.velocity.y >= -0.05)
+        {
+            rgdBody.AddForce(new Vector2(0, -BLOCKED_BOOST));
+        }
+
+        if (transform.position.y <= BOTTOM_SCREEN)
         {
             sound.clip = clip[2];
             sound.Play();
-            int newScore = master_Script.score - 50;
+            int newScore = master_Script.score - 500;
             if (newScore >= 0)
             {
                 master_Script.score = newScore;
                 master_Script.displayedScore.SetText("Score : " + master_Script.score);
             }
-            
+            else
+            {
+                master_Script.score = 0;
+                master_Script.displayedScore.SetText("Score : " + master_Script.score);
+            }
+
             StartCoroutine(Spawn());
-        }
+        } 
     }
 
     IEnumerator Spawn()
@@ -47,10 +61,7 @@ public class Ball : MonoBehaviour
         sound.Play();
         transform.position = new Vector3(0, BALL_Y, 0);
         rgdBody.velocity = new Vector2(0, 0);
-        rgdBody.gravityScale = 0; //Pour que la balle ne tombe pas à cause de la gravité
         yield return new WaitForSeconds(TIME_SPAWN);
-        rgdBody.gravityScale = GRAVITY; //On réactive la gravité pour éviter que la balle se bloque en Y
-                                          //La valeur de la gravité est faible pour ne pas influencer la vitesse de la balle
         rgdBody.velocity = new Vector2(1, LAUNCH_SPEED);
     }
 
@@ -63,9 +74,9 @@ public class Ball : MonoBehaviour
             float ballPosition = transform.position.x;
             float paddlePosition = collision.transform.position.x;
             float diffX;
-            //diffX = paddlePosition - ballPosition;
             diffX = ballPosition - paddlePosition;
-            rgdBody.velocity += new Vector2(diffX * PUISSANCE_DEVIATION, 0);
+            //rgdBody.velocity += new Vector2(diffX * PUISSANCE_DEVIATION, 0);
+            rgdBody.AddForce(new Vector2(diffX * PUISSANCE_DEVIATION, 0));
         }
         
         if(collision.gameObject.tag == "wall")
