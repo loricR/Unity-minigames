@@ -7,7 +7,7 @@ public class scriptPanier : MonoBehaviour
 {
 
 
-    private float speed = 10.0f;
+    private float speed = 13.0f;
     private int score = 0;
     public TextMeshPro displayedText;
     private AudioSource son;

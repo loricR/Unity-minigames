@@ -5,95 +5,85 @@ using TMPro;
 
 public class FB_GameMaster : MonoBehaviour
 {
+    //Prefab of the obstacles
     public GameObject Obstacle_prefab;
 
+    //Position of the obstacles' spawning
     private int PipeSpawnPosX = 10;
 
+    //Score management
     private int score = 0;
     public TextMeshPro displayedScore;
 
     private bool gameOver = false;
 
-    //Variables liées au timer (temps entre 2 spawn de pomme)
-    private float timer = 3.5f;
-    private float timer_variable;
+    //Time between to spawn (in seconds)
+    private float timer = 2f;
 
-    //Variables liées à la génération de position aléatoire
+    //Random generation of position
     private float randomSign;
     private float randomValue;
 
-    private GameObject currentObstacle1;
-    private GameObject currentObstacle2;
-    private int lastSaved;
+    //List of current obstacles
+    private List<GameObject> currentObstacles = new List<GameObject>();
 
 
     // Start is called before the first frame update
     void Start()
     {
-        timer_variable = timer;
-        GameObject newObstacle = Instantiate(Obstacle_prefab);
-        newObstacle.GetComponent<PipeObstacle_Script>().ref_spawner = this;
-        newObstacle.transform.position = new Vector3(PipeSpawnPosX, 0, 0);
-        currentObstacle1 = newObstacle;
-        lastSaved = 1;
+        //The coroutine is started (it spawn obstacles every 'timer' seconds)
+        StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!gameOver)
-        {
-            //Boucle qui se déclenche à chaque durée définie dans "timer"
-            timer_variable = timer_variable - Time.deltaTime;
-            if (timer_variable <= 0 && !gameOver)
-            {
-                //Generate a random position between -2.5 and 2.5
-                randomSign = Random.value;
-                randomValue = Random.value * 2.5f;
-                if (randomSign <= 0.5f) //random sign
-                {
-                    randomValue = -randomValue;
-                }
 
-                //Drop an apple
-                GameObject newObstacle = Instantiate(Obstacle_prefab);
-                newObstacle.GetComponent<PipeObstacle_Script>().ref_spawner = this;
-                newObstacle.transform.position = new Vector3(PipeSpawnPosX, randomValue, 0);
-                if (lastSaved == 1)
-                {
-                    currentObstacle2 = newObstacle;
-                    lastSaved = 2;
-                }
-                else
-                {
-                    currentObstacle1 = newObstacle;
-                    lastSaved = 1;
-                }
-
-                //Reset timer
-                timer_variable = timer;
-            }
-        }
     }
 
     public void addPoint()
-    {
+    { //update the score
         score = score + 1;
         Debug.Log("Current score : " + score);
         displayedScore.SetText("Score : " + score);
     }
 
     public void GameOver()
-    {
+    { //Stop all the obstacles
         gameOver = true;
-        if (currentObstacle1 != null)
+        foreach(GameObject obstacle in currentObstacles)
         {
-            currentObstacle1.GetComponent<PipeObstacle_Script>().gameOver();
-
-        }
-        if (currentObstacle2 != null)
-        {
-            currentObstacle2.GetComponent<PipeObstacle_Script>().gameOver();
+            obstacle.GetComponent<PipeObstacle_Script>().gameOver();
         }
     }
+
+    protected IEnumerator Spawn()
+    {
+        while(!gameOver)
+        {
+            //Generate a random position between -2.5 and 2.5
+            randomSign = Random.value;
+            randomValue = Random.value * 2.5f;
+            if (randomSign <= 0.5f) //random sign
+            {
+                randomValue = -randomValue;
+            }
+
+            //Generate an obstacle
+            GameObject newObstacle = Instantiate(Obstacle_prefab);
+            newObstacle.GetComponent<PipeObstacle_Script>().ref_spawner = this;
+            newObstacle.transform.position = new Vector3(PipeSpawnPosX, randomValue, 0);
+            currentObstacles.Add(newObstacle);
+
+            //Waiting
+            yield return new WaitForSeconds(timer);
+        }
+    }
+
+    public void deleteObstacle()
+    { //Remove the obstacle when it dies
+        currentObstacles.RemoveAt(0);
+    }
+
+
 }
