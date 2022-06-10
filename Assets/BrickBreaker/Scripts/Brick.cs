@@ -5,6 +5,7 @@ using UnityEngine;
 public class Brick : MonoBehaviour
 {
     [HideInInspector] public Master master_Script;
+
     // Start is called before the first frame update
     void Start()
     {

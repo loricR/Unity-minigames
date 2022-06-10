@@ -65,9 +65,7 @@ public class Master : MonoBehaviour
 
     public void ReportBrickDeath()
     {
-        Debug.Log(score);
         score += 50;
-        Debug.Log(score);
         displayedScore.SetText("Score : " + score);
         brickCount--;
     }

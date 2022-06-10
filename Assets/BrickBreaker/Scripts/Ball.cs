@@ -6,14 +6,22 @@ public class Ball : MonoBehaviour
 {
     const float BOTTOM_SCREEN = -12.4f;
     const float LAUNCH_SPEED = -10f;
-    const float TIME_SPAWN = 2f;
+    const float TIME_INTRO = 2f;
+    const int TIME_SPAWN = 2;
     const int PUISSANCE_DEVIATION = 100;
     const float BLOCKED_BOOST = 0.1f;
     const float BALL_Y = -4f;
+
+    const int CLIP_PAD = 0;
+    const int CLIP_WALL = 1;
+    const int CLIP_LOSS = 2;
+    const int CLIP_INTRO = 3;
+
     protected Rigidbody2D rgdBody;
     [HideInInspector] public Master master_Script;
     protected AudioSource sound;
     [SerializeField] protected AudioClip[] clip;
+    private bool falling;
 
     // Start is called before the first frame update
     void Start()
@@ -35,10 +43,11 @@ public class Ball : MonoBehaviour
             rgdBody.AddForce(new Vector2(0, -BLOCKED_BOOST));
         }
 
-        if (transform.position.y <= BOTTOM_SCREEN)
+        if (transform.position.y <= BOTTOM_SCREEN && !falling)
         {
-            sound.clip = clip[2];
-            sound.Play();
+            StopAllCoroutines();
+            StartCoroutine(ReSpawn());
+            falling = true;
             int newScore = master_Script.score - 500;
             if (newScore >= 0)
             {
@@ -50,26 +59,38 @@ public class Ball : MonoBehaviour
                 master_Script.score = 0;
                 master_Script.displayedScore.SetText("Score : " + master_Script.score);
             }
-
-            StartCoroutine(Spawn());
         } 
     }
 
-    IEnumerator Spawn()
+    protected IEnumerator Spawn()
     {
-        sound.clip = clip[3];
+        sound.clip = clip[CLIP_INTRO];
         sound.Play();
         transform.position = new Vector3(0, BALL_Y, 0);
         rgdBody.velocity = new Vector2(0, 0);
-        yield return new WaitForSeconds(TIME_SPAWN);
+        yield return new WaitForSeconds(TIME_INTRO);
         rgdBody.velocity = new Vector2(1, LAUNCH_SPEED);
+        falling = false;
+    }
+
+    protected IEnumerator ReSpawn()
+    {
+        int second = TIME_SPAWN;
+        sound.clip = clip[CLIP_LOSS];
+        sound.Play();
+        while (second > 0)
+        {
+            yield return new WaitForSeconds(1);
+            second--;
+        }
+        StartCoroutine(Spawn());
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "paddle")
         {
-            sound.clip = clip[0];
+            sound.clip = clip[CLIP_PAD];
             sound.Play();
             float ballPosition = transform.position.x;
             float paddlePosition = collision.transform.position.x;
@@ -81,13 +102,13 @@ public class Ball : MonoBehaviour
         
         if(collision.gameObject.tag == "wall")
         {
-            sound.clip = clip[1];
+            sound.clip = clip[CLIP_WALL];
             sound.Play();
         }
 
         if (collision.gameObject.tag == "brick")
         {
-            sound.clip = clip[0];
+            sound.clip = clip[CLIP_PAD];
             sound.Play();
         }
     }
