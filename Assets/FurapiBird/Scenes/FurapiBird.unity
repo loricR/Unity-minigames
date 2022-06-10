@@ -1282,6 +1282,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ref_gameMaster: {fileID: 1084445603}
+  bird1: {fileID: 21300000, guid: d9034032646e4df4380093b8026eea17, type: 3}
+  bird2: {fileID: 21300000, guid: acc1d014a81f3e74a823efa8edf281be, type: 3}
+  deadBird: {fileID: 21300000, guid: 22dbcfeb832f14345812b17d1ba48490, type: 3}
+  birdImage: {fileID: 790146230}
 --- !u!1 &2132994669
 GameObject:
   m_ObjectHideFlags: 0

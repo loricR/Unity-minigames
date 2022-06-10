@@ -6,6 +6,7 @@ public class Bird_script : MonoBehaviour
 {
     //Access to rigidBody properties
     private Rigidbody2D rigidb;
+    private BoxCollider2D boxcolid;
 
     //Access to FB_GameMaster functions
     public GameObject ref_gameMaster;
@@ -18,11 +19,23 @@ public class Bird_script : MonoBehaviour
     private float dead_bounciness = 10;
     private float dead_rotation = -400;
 
+    //Bird's images refrences
+    public Sprite bird1;
+    public Sprite bird2;
+    public Sprite deadBird;
+    public GameObject birdImage;
+    private SpriteRenderer birdSpriteRen;
+    private float TimeChangingAppearenceBouncing = 0.2f;
+
+
     // Start is called before the first frame update
     void Start()
     {
         //getting the rigidBody access
         rigidb = GetComponent<Rigidbody2D>();
+        boxcolid = GetComponent<BoxCollider2D>();
+        //getting the sprite renderer access
+        birdSpriteRen = birdImage.GetComponent<SpriteRenderer>();
         //Getting the FB_GameMaster access
         ref_spawner = ref_gameMaster.GetComponent<FB_GameMaster>();
     }
@@ -37,11 +50,18 @@ public class Bird_script : MonoBehaviour
             rigidb.velocity = new Vector2(1, dead_bounciness);
             rigidb.angularVelocity = dead_rotation;
         }
+        if (transform.position.y >= 5)
+        {
+            ref_spawner.GameOver();
+            rigidb.velocity = new Vector2(1, -dead_bounciness);
+            rigidb.angularVelocity = dead_rotation;
+        }
 
-        //Checking for a jump
-        if (Input.GetKeyDown(KeyCode.UpArrow))
+            //Checking for a jump
+            if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             rigidb.velocity = new Vector2(0, height_bouncing);
+            StartCoroutine(BounceAnim());
         }
         
     }
@@ -52,10 +72,18 @@ public class Bird_script : MonoBehaviour
         if (collision.gameObject.tag == "obstacle")
         {
             ref_spawner.GameOver();
+            boxcolid.enabled = false;
             rigidb.velocity = new Vector2(1, dead_bounciness);
             rigidb.angularVelocity = dead_rotation;
+            birdSpriteRen.sprite = deadBird;
         }
     }
 
+    IEnumerator BounceAnim()
+    {
+        birdSpriteRen.sprite = bird2;
+        yield return new WaitForSeconds(TimeChangingAppearenceBouncing);
+        birdSpriteRen.sprite = bird1;
+    }
 
 }
