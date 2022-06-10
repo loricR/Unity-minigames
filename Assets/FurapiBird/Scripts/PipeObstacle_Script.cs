@@ -29,6 +29,7 @@ public class PipeObstacle_Script : MonoBehaviour
             if (transform.position.x < despawn_posX)
             {
                 Destroy(gameObject);
+                ref_spawner.deleteObstacle();
             }
             if (transform.position.x < AddPointPosX && !PointAdded)
             {

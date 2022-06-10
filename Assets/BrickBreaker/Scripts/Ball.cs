@@ -10,7 +10,7 @@ public class Ball : MonoBehaviour
     const int PUISSANCE_DEVIATION = 3;
     const float BALL_Y = -4f;
     const float GRAVITY = 0.05f;
-    protected Rigidbody2D rigidbody;
+    protected Rigidbody2D rgdBody;
     [HideInInspector] public Master master_Script;
     protected AudioSource sound;
     [SerializeField] protected AudioClip[] clip;
@@ -18,7 +18,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        rgdBody = GetComponent<Rigidbody2D>();
         sound = GetComponent<AudioSource>();
         StartCoroutine(Spawn());
     }
@@ -46,12 +46,12 @@ public class Ball : MonoBehaviour
         sound.clip = clip[3];
         sound.Play();
         transform.position = new Vector3(0, BALL_Y, 0);
-        rigidbody.velocity = new Vector2(0, 0);
-        rigidbody.gravityScale = 0; //Pour que la balle ne tombe pas à cause de la gravité
+        rgdBody.velocity = new Vector2(0, 0);
+        rgdBody.gravityScale = 0; //Pour que la balle ne tombe pas à cause de la gravité
         yield return new WaitForSeconds(TIME_SPAWN);
-        rigidbody.gravityScale = GRAVITY; //On réactive la gravité pour éviter que la balle se bloque en Y
+        rgdBody.gravityScale = GRAVITY; //On réactive la gravité pour éviter que la balle se bloque en Y
                                           //La valeur de la gravité est faible pour ne pas influencer la vitesse de la balle
-        rigidbody.velocity = new Vector2(1, LAUNCH_SPEED);
+        rgdBody.velocity = new Vector2(1, LAUNCH_SPEED);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -65,7 +65,7 @@ public class Ball : MonoBehaviour
             float diffX;
             //diffX = paddlePosition - ballPosition;
             diffX = ballPosition - paddlePosition;
-            rigidbody.velocity += new Vector2(diffX * PUISSANCE_DEVIATION, 0);
+            rgdBody.velocity += new Vector2(diffX * PUISSANCE_DEVIATION, 0);
         }
         
         if(collision.gameObject.tag == "wall")

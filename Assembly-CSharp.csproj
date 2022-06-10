@@ -62,14 +62,14 @@
     <Compile Include="Assets\BrickBreaker\Scripts\Master.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Ball.cs" />
     <Compile Include="Assets\FurapiBird\Scripts\PipeObstacle_Script.cs" />
+    <Compile Include="Assets\FurapiBird\Scripts\FB_GameMaster.cs" />
     <Compile Include="Assets\AppleCatcher\Scripts\scriptPomme.cs" />
+    <Compile Include="Assets\FurapiBird\Scripts\Bird_script.cs" />
     <Compile Include="Assets\AppleCatcher\Scripts\TitleScript.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Brick.cs" />
     <Compile Include="Assets\MainMenu\Script\listener_script.cs" />
     <Compile Include="Assets\AppleCatcher\Scripts\spawnerScript.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Paddle.cs" />
-    <Compile Include="Assets\FurapiBird\Scripts\Bird_script.cs" />
-    <Compile Include="Assets\FurapiBird\Scripts\FB_GameMaster.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
