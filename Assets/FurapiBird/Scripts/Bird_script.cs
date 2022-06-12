@@ -27,6 +27,9 @@ public class Bird_script : MonoBehaviour
     private SpriteRenderer birdSpriteRen;
     private float TimeChangingAppearenceBouncing = 0.2f;
 
+    private float TimeAtTheEnd = 7.0f;
+    private bool animPlayed = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -44,17 +47,15 @@ public class Bird_script : MonoBehaviour
     void Update()
     {
         //Cheching if the bird is not smashed
-        if (transform.position.y <= -5)
+        if (transform.position.y <= -5) //On the floor
         {
-            ref_spawner.GameOver();
             rigidb.velocity = new Vector2(1, dead_bounciness);
-            rigidb.angularVelocity = dead_rotation;
+            GameOver();
         }
-        if (transform.position.y >= 5)
+        if (transform.position.y >= 5) //On the ceiling
         {
-            ref_spawner.GameOver();
             rigidb.velocity = new Vector2(1, -dead_bounciness);
-            rigidb.angularVelocity = dead_rotation;
+            GameOver();
         }
 
             //Checking for a jump
@@ -71,19 +72,35 @@ public class Bird_script : MonoBehaviour
     {
         if (collision.gameObject.tag == "obstacle")
         {
-            ref_spawner.GameOver();
-            boxcolid.enabled = false;
             rigidb.velocity = new Vector2(1, dead_bounciness);
-            rigidb.angularVelocity = dead_rotation;
-            birdSpriteRen.sprite = deadBird;
+            GameOver();
         }
     }
 
-    IEnumerator BounceAnim()
+    private void GameOver()
+    {
+        ref_spawner.GameOver();
+        boxcolid.enabled = false;
+        rigidb.angularVelocity = dead_rotation;
+        StartCoroutine("EndAnim");
+    }
+
+    protected IEnumerator BounceAnim()
     {
         birdSpriteRen.sprite = bird2;
         yield return new WaitForSeconds(TimeChangingAppearenceBouncing);
         birdSpriteRen.sprite = bird1;
+    }
+
+    protected IEnumerator EndAnim()
+    {
+        if(!animPlayed)
+        {
+            animPlayed = true;
+            birdSpriteRen.sprite = deadBird;
+            yield return new WaitForSeconds(TimeAtTheEnd);
+            birdSpriteRen.sprite = null;
+        }
     }
 
 }

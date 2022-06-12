@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    const float SPEED = 15.0f;
+    const float SPEED = 20.0f;
     const float LIMIT_RIGHT = 12.437f;
     const float LIMIT_LEFT = -12.437f;
     protected AudioSource sound;
