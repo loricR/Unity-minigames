@@ -15,10 +15,17 @@ public class FB_GameMaster : MonoBehaviour
     private int score = 0;
     public TextMeshPro displayedScore;
 
+    //"Press escap to go back to the main menu"
+    public TextMeshPro endText;
+
     private bool gameOver = false;
 
-    //Time between to spawn (in seconds)
+    //Time between two spawns
     private float timer = 2f;
+
+    //Times at the end
+    private float TimeAtTheEnd = 0.8f;
+    private float TimeBeforeGAMEOVER = 4.0f;
 
     //Random generation of position
     private float randomSign;
@@ -27,12 +34,38 @@ public class FB_GameMaster : MonoBehaviour
     //List of current obstacles
     private List<GameObject> currentObstacles = new List<GameObject>();
 
+    //Music and sounds
+    public AudioClip musique;
+    public AudioClip hitten;
+    public AudioClip EndSound;
+    private AudioSource ref_audioSource_music;
+    private AudioSource ref_audioSource_hitten;
+    private AudioSource ref_audioSource_endsound;
+    private bool soundPlayed = false;
+
 
     // Start is called before the first frame update
     void Start()
     {
         //The coroutine is started (it spawn obstacles every 'timer' seconds)
         StartCoroutine(Spawn());
+
+        //Creating of audio sources and playing the music
+        AudioSource music = gameObject.AddComponent<AudioSource>();
+        ref_audioSource_music = music;
+        music.loop = true;
+        music.clip = musique;
+        music.Play();
+
+        AudioSource crash = gameObject.AddComponent<AudioSource>();
+        ref_audioSource_hitten = crash;
+        crash.loop = false;
+        crash.clip = hitten;
+
+        AudioSource Over = gameObject.AddComponent<AudioSource>();
+        ref_audioSource_endsound = Over;
+        Over.loop = false;
+        Over.clip = EndSound;
     }
 
     // Update is called once per frame
@@ -42,7 +75,7 @@ public class FB_GameMaster : MonoBehaviour
     }
 
     public void addPoint()
-    { //update the score
+    { //Update the score
         score = score + 1;
         Debug.Log("Current score : " + score);
         displayedScore.SetText("Score : " + score);
@@ -55,6 +88,7 @@ public class FB_GameMaster : MonoBehaviour
         {
             obstacle.GetComponent<PipeObstacle_Script>().gameOver();
         }
+        StartCoroutine("End");
     }
 
     protected IEnumerator Spawn()
@@ -77,6 +111,26 @@ public class FB_GameMaster : MonoBehaviour
 
             //Waiting
             yield return new WaitForSeconds(timer);
+        }
+    }
+
+    protected IEnumerator End()
+    {
+        if(!soundPlayed)
+        { //Gestion of the sounds at the end
+            soundPlayed = true;
+            ref_audioSource_music.Stop();
+            ref_audioSource_hitten.Play();
+            yield return new WaitUntil(() => ref_audioSource_hitten.isPlaying == false);
+            yield return new WaitForSeconds(TimeAtTheEnd);
+            ref_audioSource_endsound.Play();
+
+            //Displaying the score in the center
+            displayedScore.transform.position = new Vector3(0, 1, 0);
+            displayedScore.transform.localScale = new Vector3(2.8f, 2.8f, 2.8f);
+            yield return new WaitForSeconds(TimeBeforeGAMEOVER);
+            displayedScore.SetText("GAME OVER");
+            endText.color = new Vector4(0, 0, 0, 255);
         }
     }
 

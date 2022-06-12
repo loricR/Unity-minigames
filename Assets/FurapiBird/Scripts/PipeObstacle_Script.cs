@@ -14,10 +14,16 @@ public class PipeObstacle_Script : MonoBehaviour
 
     private bool GameOver = false;
 
+    public AudioClip Point;
+    private AudioSource ref_audioSource_point;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        AudioSource point = gameObject.AddComponent<AudioSource>();
+        ref_audioSource_point = point;
+        point.loop = false;
+        point.clip = Point;
     }
 
     // Update is called once per frame
@@ -33,6 +39,7 @@ public class PipeObstacle_Script : MonoBehaviour
             }
             if (transform.position.x < AddPointPosX && !PointAdded)
             {
+                ref_audioSource_point.Play();
                 ref_spawner.addPoint();
                 PointAdded = true;
             }

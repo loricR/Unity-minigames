@@ -12,8 +12,13 @@ public class scriptPanier : MonoBehaviour
     public TextMeshPro displayedText;
     private AudioSource son;
 
+    public TextMeshPro endText;
+
     private Animator ref_animator;
     private float speed_last_frame = 0;
+
+    private float time_at_the_end = 3;
+
 
     // Start is called before the first frame update
     void Start()
@@ -83,6 +88,14 @@ public class scriptPanier : MonoBehaviour
     {
         displayedText.transform.position = new Vector3(0, 1, 0);
         displayedText.transform.localScale = new Vector3(3, 3, 3);
+        StartCoroutine("GameOverMessage");
+    }
+
+    IEnumerator GameOverMessage()
+    {
+        yield return new WaitForSeconds(time_at_the_end);
+        displayedText.SetText("GAME OVER");
+        endText.color = new Vector4(0, 0, 0, 255);
     }
 
 }

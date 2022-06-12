@@ -68,6 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ref_spawner: {fileID: 0}
+  Point: {fileID: 8300000, guid: 19f6091c046bd344190a7805b39bb00b, type: 3}
 --- !u!1 &3828303593868760451
 GameObject:
   m_ObjectHideFlags: 0

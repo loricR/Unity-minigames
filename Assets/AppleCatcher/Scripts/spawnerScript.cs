@@ -10,7 +10,6 @@ public class spawnerScript : MonoBehaviour
     private float timer = 1;
     private float timer_variable;
 
-    private float time_at_the_end = 3;
 
     public GameObject Apple;
     public GameObject Panier;
@@ -100,24 +99,11 @@ public class spawnerScript : MonoBehaviour
             gameOver = true;
             Destroy(ref_life1.gameObject);
             Panier.GetComponent<scriptPanier>().GamerOver();
-            StartCoroutine("LoadScene_GameOver");
         }
 
     }
 
 
-    IEnumerator LoadScene_GameOver()
-    {
-        yield return new WaitForSeconds(time_at_the_end);
-
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync("GameOverAC");
-
-        //Wait until the asynchronous scene fully loads
-        while (!asyncLoad.isDone)
-        {
-            yield return null;
-        }
-    }
 
 
 
