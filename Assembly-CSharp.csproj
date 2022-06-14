@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Assets\BrickBreaker\Scripts\listener_brickbreaker.cs" />
     <Compile Include="Assets\listener_exit.cs" />
+    <Compile Include="Assets\BrickBreaker\Scripts\Coin.cs" />
     <Compile Include="Assets\AppleCatcher\Scripts\scriptPanier.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Master.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Ball.cs" />

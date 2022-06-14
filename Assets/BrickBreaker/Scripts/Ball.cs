@@ -45,6 +45,7 @@ public class Ball : MonoBehaviour
 
         if (transform.position.y <= BOTTOM_SCREEN && !falling)
         {
+            master_Script.updateLife();
             StopAllCoroutines();
             StartCoroutine(ReSpawn());
             falling = true;
@@ -59,7 +60,12 @@ public class Ball : MonoBehaviour
                 master_Script.score = 0;
                 master_Script.displayedScore.SetText("Score : " + master_Script.score);
             }
-        } 
+        }
+
+        if (master_Script.gameOver)
+        {
+            rgdBody.velocity = new Vector2(0, 0);   //Stop the movement of the ball if the game is over
+        }
     }
 
     protected IEnumerator Spawn()
@@ -110,6 +116,11 @@ public class Ball : MonoBehaviour
         {
             sound.clip = clip[CLIP_PAD];
             sound.Play();
+        }
+
+        if (collision.gameObject.tag == "coin")
+        {
+            Destroy(collision.gameObject);  //If the ball touch the coin, it destroys the coin
         }
     }
 }
