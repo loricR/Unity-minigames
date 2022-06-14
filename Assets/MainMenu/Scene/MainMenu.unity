@@ -825,6 +825,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 18c745477b2012b48a36327af41b0e53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  musique: {fileID: 8300000, guid: ba865cd4eea1c2f46ab0ecb60d7259ce, type: 3}
+  clic: {fileID: 8300000, guid: 5baef60a714e686468e4861bc31bbc8d, type: 3}
 --- !u!4 &1296995444
 Transform:
   m_ObjectHideFlags: 0

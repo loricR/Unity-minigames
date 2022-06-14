@@ -6,21 +6,25 @@ using UnityEngine.SceneManagement;
 
 public class spawnerScript : MonoBehaviour
 {
-    //Variables liées au timer (temps entre 2 spawn de pomme)
+    //Timer variables
     private float timer = 1;
-    private float timer_variable;
 
-
+    //References to game objects
     public GameObject Apple;
     public GameObject Panier;
 
-    //Variables liées à la génération de position aléatoire
+    //Variables for the increasing difficulty
+    private int nb_apple_spawn = 0;
+    private float gravityScaleApples = 1;
+    private float increasing_gravity_apples = 0.5f;
+
+    //Variables for generating random position
     private float randomSign;
     private float randomValue;
 
     public AudioClip musique;
 
-    //Variables liées à la gestion du nombre de vies
+    //Lives' gestion variables
     public GameObject Life;
     private int nb_life = 3;
     private bool gameOver = false;
@@ -31,10 +35,7 @@ public class spawnerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        timer_variable = timer;
-
-        //Création des coeurs en haut à droite qui symbolisent les vies
+        //Creation of the lives' hearths at the top right
         GameObject life1 = Instantiate(Life);
         ref_life1 = life1;
         life1.transform.position = new Vector3(8.5f, 4.5f, -1);
@@ -45,44 +46,28 @@ public class spawnerScript : MonoBehaviour
         ref_life3 = life3;
         life3.transform.position = new Vector3(6.1f, 4.5f, -1);
 
-        //Génération d'une première pomme au centre de l'écran
+        //First apple spawning
         GameObject newApple = Instantiate(Apple);
         newApple.GetComponent<scriptPomme>().ref_spawner = this;
         newApple.transform.position = new Vector3(0, 6.0f, -5);
 
-        //Démarrage de la musique
+        //Playing the music
         AudioSource music = gameObject.AddComponent<AudioSource>();
         music.loop = true;
         music.clip = musique;
         music.Play();
+
+        //starting the spawning coroutine
+        StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
     void Update()
     {
-        //Boucle qui se déclenche à chaque durée définie dans "timer"
-        timer_variable = timer_variable - Time.deltaTime;
-        if(timer_variable <= 0 && !gameOver)
-        {
-            //Generate a random position between -8 and 8
-            randomSign = Random.value;
-            randomValue = Random.value * 8;
-            if(randomSign <= 0.5f) //random sign
-            {
-                randomValue = -randomValue;
-            }
 
-            //Drop an apple
-            GameObject newApple = Instantiate(Apple);
-            newApple.transform.position = new Vector3(randomValue, 6.0f, -5);
-            newApple.GetComponent<scriptPomme>().ref_spawner = this;
-
-            //Reset timer
-            timer_variable = timer;
-        }
     }
 
-    public void AppleDied() //Fonction appellée par une pomme si elle est ratée par le panier
+    public void AppleDied() //Function started by an apple missed by the basket
     {
         nb_life = nb_life - 1;
 
@@ -101,6 +86,44 @@ public class spawnerScript : MonoBehaviour
             Panier.GetComponent<scriptPanier>().GamerOver();
         }
 
+    }
+
+    protected IEnumerator Spawn()
+    {
+        while (!gameOver)
+        {
+            //Generate a random timer
+            while(timer<0.5)
+            {
+                timer = Random.value * 1.5f;
+            }
+            yield return new WaitForSeconds(timer);
+            //Generate a random position between -8 and 8
+            randomSign = Random.value;
+            randomValue = Random.value * 8;
+            if (randomSign <= 0.5f) //random sign
+            {
+                randomValue = -randomValue;
+            }
+
+            //Drop an apple
+            GameObject newApple = Instantiate(Apple);
+            newApple.transform.position = new Vector3(randomValue, 6.0f, -5);
+            newApple.GetComponent<scriptPomme>().ref_spawner = this;
+            newApple.GetComponent<scriptPomme>().gravScale = gravityScaleApples;
+
+            //Increase the apple counter
+            nb_apple_spawn++;
+
+            //Change the speed of the basket and the gravity of the apples to increase difficulty
+            if (10 - nb_apple_spawn <= 0)
+            {
+                Panier.GetComponent<scriptPanier>().Increase_speed();
+                gravityScaleApples = gravityScaleApples + increasing_gravity_apples;
+                nb_apple_spawn = 0;
+            }
+
+        }
     }
 
 

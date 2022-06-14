@@ -8,6 +8,10 @@ public class FB_GameMaster : MonoBehaviour
     //Prefab of the obstacles
     public GameObject Obstacle_prefab;
 
+    //Getting access to the bird
+    public GameObject Bird;
+    private Rigidbody2D rigibBird;
+
     //Position of the obstacles' spawning
     private int PipeSpawnPosX = 10;
 
@@ -15,13 +19,23 @@ public class FB_GameMaster : MonoBehaviour
     private int score = 0;
     public TextMeshPro displayedScore;
 
-    //"Press escap to go back to the main menu"
+    //Text "Press escap to go back to the main menu"
     public TextMeshPro endText;
 
     private bool gameOver = false;
 
     //Time between two spawns
     private float timer = 2f;
+
+    //Time before the game starts
+    private int time_at_the_beginning = 3;
+    private bool started = false;
+    public TextMeshPro timer_beginning;
+
+    //Chrono at the top right
+    public TextMeshPro chrono;
+    private int minutes;
+    private int seconds;
 
     //Times at the end
     private float TimeAtTheEnd = 0.8f;
@@ -47,8 +61,17 @@ public class FB_GameMaster : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Getting access to the rigidbody of the bird
+        rigibBird = Bird.GetComponent<Rigidbody2D>();
+
+        //The coroutine is started (it generate a timer at the beginning to wait the player to be ready)
+        StartCoroutine(Timer_beginning());
+
         //The coroutine is started (it spawn obstacles every 'timer' seconds)
         StartCoroutine(Spawn());
+
+        //The coroutine is started (it manages the timer at the top right)
+        StartCoroutine(Chrono());
 
         //Creating of audio sources and playing the music
         AudioSource music = gameObject.AddComponent<AudioSource>();
@@ -93,6 +116,11 @@ public class FB_GameMaster : MonoBehaviour
 
     protected IEnumerator Spawn()
     {
+        //Waiting for the end of the timer
+        while(!started)
+        {
+            yield return new WaitForSeconds(0.1f);
+        }
         while(!gameOver)
         {
             //Generate a random position between -2.5 and 2.5
@@ -108,6 +136,11 @@ public class FB_GameMaster : MonoBehaviour
             newObstacle.GetComponent<PipeObstacle_Script>().ref_spawner = this;
             newObstacle.transform.position = new Vector3(PipeSpawnPosX, randomValue, 0);
             currentObstacles.Add(newObstacle);
+
+            if(seconds == 00 || seconds == 30)
+            {
+                StartCoroutine(UpgradeDifficulty());
+            }
 
             //Waiting
             yield return new WaitForSeconds(timer);
@@ -128,7 +161,10 @@ public class FB_GameMaster : MonoBehaviour
             //Displaying the score in the center
             displayedScore.transform.position = new Vector3(0, 1, 0);
             displayedScore.transform.localScale = new Vector3(2.8f, 2.8f, 2.8f);
+            chrono.transform.position = new Vector3(0, -1, 0);
+            chrono.SetText("in  " + string.Format("{0:00}:{1:00}", minutes, seconds));
             yield return new WaitForSeconds(TimeBeforeGAMEOVER);
+            chrono.SetText(" ");
             displayedScore.SetText("GAME OVER");
             endText.color = new Vector4(0, 0, 0, 255);
         }
@@ -139,5 +175,48 @@ public class FB_GameMaster : MonoBehaviour
         currentObstacles.RemoveAt(0);
     }
 
+    public int getTimeAtTheBeginning()
+    { //To get the attribute for the Bird script (the attribute is 'private' for protecting it)
+        return this.time_at_the_beginning;
+    }
+
+    protected IEnumerator Timer_beginning()
+    { //Print a timer at the beginning of the game
+        timer_beginning.SetText("" + time_at_the_beginning);
+        for (int i = 1; i <= time_at_the_beginning; i++)
+        {
+            yield return new WaitForSeconds(1);
+            timer_beginning.SetText("" + (time_at_the_beginning-i));
+        }
+        timer_beginning.SetText(" ");
+        started = true;
+    }
+
+    protected IEnumerator Chrono()
+    { //Manages the chrono at the top right
+        yield return new WaitForSeconds(time_at_the_beginning);
+        yield return new WaitForSeconds(1);
+        while (!gameOver)
+        {
+            if(seconds<=60)
+            {
+                seconds++;
+            }
+            else
+            {
+                seconds = 0;
+                minutes++;
+            }
+            chrono.SetText(string.Format("{0:00}:{1:00}", minutes, seconds));
+            yield return new WaitForSeconds(1);
+        }
+    }
+
+    protected IEnumerator UpgradeDifficulty()
+    {
+        rigibBird.gravityScale = rigibBird.gravityScale + 0.3f;
+        timer = timer - 0.3f;
+        yield return null;
+    }
 
 }
