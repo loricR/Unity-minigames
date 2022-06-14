@@ -93,10 +93,10 @@ public class spawnerScript : MonoBehaviour
         while (!gameOver)
         {
             //Generate a random timer
-            while(timer<0.5)
+            do
             {
                 timer = Random.value * 1.5f;
-            }
+            } while(timer < 0.5);
             yield return new WaitForSeconds(timer);
             //Generate a random position between -8 and 8
             randomSign = Random.value;
