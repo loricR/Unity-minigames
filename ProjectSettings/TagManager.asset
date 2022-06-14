@@ -5,6 +5,11 @@ TagManager:
   serializedVersion: 2
   tags:
   - obstacle
+  - wall
+  - paddle
+  - ball
+  - brick
+  - coin
   layers:
   - Default
   - TransparentFX
