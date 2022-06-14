@@ -146,7 +146,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   master_Script: {fileID: 0}
-  collisionSound: {fileID: 8300000, guid: 97b05106b9adcf24da40c2fb519bc266, type: 3}
+  coin_prefab: {fileID: 8301386409087370627, guid: 064a471b6ea4ee14fb1cc23d0504c72c, type: 3}
 --- !u!82 &-6697603012403462918
 AudioSource:
   m_ObjectHideFlags: 0

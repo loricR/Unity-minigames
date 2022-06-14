@@ -8,6 +8,7 @@ public class Paddle : MonoBehaviour
     const float LIMIT_RIGHT = 12.437f;
     const float LIMIT_LEFT = -12.437f;
     protected AudioSource sound;
+    [HideInInspector] public Master master_Script;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,10 @@ public class Paddle : MonoBehaviour
     {
         if(collision.gameObject.tag == "coin")
         {
+            master_Script.score += 100;
+            master_Script.updateScore();
             sound.Play();
+            Destroy(collision.gameObject);  //Destroy the coin
         }
     }
 }
