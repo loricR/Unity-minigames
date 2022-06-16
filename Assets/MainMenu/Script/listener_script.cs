@@ -33,7 +33,10 @@ public class listener_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit(); //Close the application when it's builded
+        }
     }
 
     //------------------------APPLE CATCHER------------------------------------
