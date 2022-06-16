@@ -15,6 +15,8 @@ public class FB_menuListener : MonoBehaviour
 
     private SpriteRenderer spriteren;
 
+    private bool transition_processing = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +37,9 @@ public class FB_menuListener : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown && !Input.GetKey(KeyCode.Mouse0))
+        if (Input.anyKeyDown && !transition_processing)
         {
+            transition_processing = true;
             ref_audioSource_music.Stop();
             ref_audioSource_validate.Play();
 

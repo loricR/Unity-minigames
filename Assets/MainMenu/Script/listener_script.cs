@@ -12,6 +12,8 @@ public class listener_script : MonoBehaviour
     private AudioSource ref_audioSource_music;
     private AudioSource ref_audioSource_clic;
 
+    private bool transition_processing = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,7 +40,11 @@ public class listener_script : MonoBehaviour
 
     public void LoadAppleCatcher()
     {
-        StartCoroutine(LoadScene_AppleCatcher());
+        if(!transition_processing)
+        {
+            StartCoroutine(LoadScene_AppleCatcher());
+            transition_processing = true;
+        }
     }
     protected IEnumerator LoadScene_AppleCatcher()
     {
@@ -59,7 +65,12 @@ public class listener_script : MonoBehaviour
 
     public void LoadBrickBreaker()
     {
-        StartCoroutine(LoadScene_BrickBreaker());
+        if (!transition_processing)
+        {
+            StartCoroutine(LoadScene_BrickBreaker());
+            transition_processing = true;
+        }
+
     }
     protected IEnumerator LoadScene_BrickBreaker()
     {
@@ -80,7 +91,12 @@ public class listener_script : MonoBehaviour
 
     public void LoadFurapiBird()
     {
-        StartCoroutine(LoadScene_FurapiBird());
+        if (!transition_processing)
+        {
+            StartCoroutine(LoadScene_FurapiBird());
+            transition_processing = true;
+        }
+
     }
     protected IEnumerator LoadScene_FurapiBird()
     {
