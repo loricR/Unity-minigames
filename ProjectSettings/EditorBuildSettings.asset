@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/MainMenu/Scene/MainMenu.unity
+    guid: 4ace4216f4a4b1b4ea862f6c4f05ea2b
+  - enabled: 1
+    path: Assets/BrickBreaker/Scenes/Menu_BrickBreaker.unity
+    guid: e67a564f2c59b874090684dcb7db5b6d
+  - enabled: 1
     path: Assets/BrickBreaker/Scenes/BrickBreaker.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
@@ -15,18 +21,12 @@ EditorBuildSettings:
     path: Assets/AppleCatcher/Scenes/Game.unity
     guid: a01c231473abd9f4d87ece2c71542729
   - enabled: 1
-    path: Assets/MainMenu/Scene/MainMenu.unity
-    guid: 4ace4216f4a4b1b4ea862f6c4f05ea2b
-  - enabled: 1
-    path: Assets/BrickBreaker/Scenes/Menu_BrickBreaker.unity
-    guid: e67a564f2c59b874090684dcb7db5b6d
+    path: Assets/FurapiBird/Scenes/FB_MainMenu.unity
+    guid: 73a9d34e13f32e64f8fea46f7b55ced5
   - enabled: 1
     path: Assets/FurapiBird/Scenes/FurapiBird.unity
     guid: 3dd5cd490fd11864abbb186c215e6d74
-  - enabled: 1
-    path: Assets/AppleCatcher/Scenes/GameOverAC.unity
-    guid: fab4b5e008e370743822ad0ba3530d32
-  - enabled: 1
-    path: Assets/FurapiBird/Scenes/FB_MainMenu.unity
-    guid: 73a9d34e13f32e64f8fea46f7b55ced5
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}
