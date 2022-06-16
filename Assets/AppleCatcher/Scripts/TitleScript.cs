@@ -6,21 +6,26 @@ using UnityEngine.SceneManagement;
 public class TitleScript : MonoBehaviour
 {
 
+    //Music attributs
     public AudioClip musique;
     public AudioClip validate;
     private AudioSource ref_audioSource_music;
     private AudioSource ref_audioSource_validate;
 
+    //Transition effect 
     public GameObject WhiteSquare;
     private float speedSquare = 0.1f;
-
     private SpriteRenderer spriteren;
+
+    private bool transition_processing = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        //Getting access to the sprite renderer of the white square
         spriteren = WhiteSquare.GetComponent<SpriteRenderer>();
 
+        //Setting the sounds ready and playing the music
         AudioSource music = gameObject.AddComponent<AudioSource>();
         ref_audioSource_music = music;
         music.loop = true;
@@ -37,8 +42,9 @@ public class TitleScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown && !Input.GetKey(KeyCode.Mouse0))
+        if (Input.anyKeyDown && !transition_processing)
         {
+            transition_processing = true;
             ref_audioSource_music.Stop();
             ref_audioSource_validate.Play();
 

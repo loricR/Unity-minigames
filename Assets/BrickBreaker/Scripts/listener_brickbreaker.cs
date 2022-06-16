@@ -14,6 +14,8 @@ public class listener_brickbreaker : MonoBehaviour
 
     private SpriteRenderer spriteren;
 
+    private bool transition_processing = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,8 +30,9 @@ public class listener_brickbreaker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.anyKeyDown)
+        if (Input.anyKeyDown && !transition_processing)
         {
+            transition_processing = true;
             ref_audioSource_validate.Play();
             StartCoroutine(ChangeSquare());
             StartCoroutine(LoadScene_Game());
