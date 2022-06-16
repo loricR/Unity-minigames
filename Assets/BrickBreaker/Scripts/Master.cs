@@ -5,6 +5,9 @@ using TMPro;
 
 public class Master : MonoBehaviour
 {
+    //Ref to listener_exit script
+    [HideInInspector] public listener_exit ref_exit;
+
     [SerializeField] protected GameObject brick_prefab;
     [SerializeField] public GameObject ball;
     [SerializeField] protected GameObject paddle;
@@ -74,6 +77,11 @@ public class Master : MonoBehaviour
             sound.Play();
             endText.SetText("GAME OVER !");
             displayedScore.transform.position = new Vector2(TEXT_SCORE_X, TEXT_SCORE_Y);
+        }
+
+        if (Input.GetKey(KeyCode.Space) && gameOver)
+        {
+            StartCoroutine(ref_exit.ReloadScene());
         }
     }
 

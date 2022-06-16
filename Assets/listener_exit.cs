@@ -5,10 +5,26 @@ using UnityEngine.SceneManagement;
 
 public class listener_exit : MonoBehaviour
 {
+
+    public spawnerScript appleCatcher;
+    public Master brickBreaker;
+    public FB_GameMaster furapiBird;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        if(appleCatcher != null)
+        {
+            appleCatcher.GetComponent<spawnerScript>().ref_exit = this;
+        }
+        else if(brickBreaker != null)
+        {
+            brickBreaker.GetComponent<Master>().ref_exit = this;
+        }
+        else if(furapiBird != null)
+        {
+            furapiBird.GetComponent<FB_GameMaster>().ref_exit = this;
+        }
     }
 
     // Update is called once per frame
@@ -33,5 +49,15 @@ public class listener_exit : MonoBehaviour
         }
     }
 
+    public IEnumerator ReloadScene()
+    {
+        Scene scene = SceneManager.GetActiveScene();
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scene.name);
 
+        //Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
 }

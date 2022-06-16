@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class spawnerScript : MonoBehaviour
 {
+    //Ref to listener_exit script
+    [HideInInspector] public listener_exit ref_exit;
+
     //Timer variables
     private float timer = 1;
 
@@ -64,7 +67,10 @@ public class spawnerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKey(KeyCode.Space) && gameOver)
+        {
+            StartCoroutine(ref_exit.ReloadScene());
+        }
     }
 
     public void AppleDied() //Function started by an apple missed by the basket
@@ -79,7 +85,7 @@ public class spawnerScript : MonoBehaviour
         {
             Destroy(ref_life2.gameObject);
         }
-        if (nb_life == 0)
+        if (nb_life == 0)   //Game over
         {
             gameOver = true;
             Destroy(ref_life1.gameObject);

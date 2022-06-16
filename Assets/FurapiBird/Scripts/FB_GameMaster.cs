@@ -5,6 +5,9 @@ using TMPro;
 
 public class FB_GameMaster : MonoBehaviour
 {
+    //Ref to listener_exit script
+    [HideInInspector] public listener_exit ref_exit;
+
     //Prefab of the obstacles
     public GameObject Obstacle_prefab;
 
@@ -94,13 +97,15 @@ public class FB_GameMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (Input.GetKeyDown(KeyCode.Space) && gameOver)
+        {
+            StartCoroutine(ref_exit.ReloadScene());
+        }
     }
 
     public void addPoint()
     { //Update the score
         score = score + 1;
-        Debug.Log("Current score : " + score);
         displayedScore.SetText("Score : " + score);
     }
 

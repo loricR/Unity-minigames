@@ -25,6 +25,8 @@ public class scriptPanier : MonoBehaviour
     //Time before writing "Game Over"
     private float time_at_the_end = 3;
 
+    const float POSITION_GAME_OVER = 3.33f;
+
 
     // Start is called before the first frame update
     void Start()
@@ -85,7 +87,6 @@ public class scriptPanier : MonoBehaviour
         {
             //Update the score
             score++;
-            Debug.Log("Current score : " + score);
             displayedText.SetText("Score : " + score);
             son.Play();
         }
@@ -93,8 +94,8 @@ public class scriptPanier : MonoBehaviour
 
     public void GamerOver()
     { //Print the score in big in the center
-        displayedText.transform.position = new Vector3(0, 1, 0);
-        displayedText.transform.localScale = new Vector3(3, 3, 3);
+        displayedText.transform.position = new Vector3(0, POSITION_GAME_OVER, 0);
+        //displayedText.transform.localScale = new Vector3(3, 3, 3);
         StartCoroutine("GameOverMessage");
     }
 
