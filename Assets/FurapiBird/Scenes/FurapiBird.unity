@@ -602,6 +602,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 890c5d8ff2a130040a6edfc63f0e684b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ref_exit: {fileID: 0}
   Obstacle_prefab: {fileID: 3828303592628693722, guid: aa9f2bc9056a9a44a8f9bb32cba40fa3, type: 3}
   Bird: {fileID: 2059148713}
   displayedScore: {fileID: 1431130678}
@@ -989,6 +990,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ede94f2e3b1e0478b924b781c5da4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appleCatcher: {fileID: 0}
+  brickBreaker: {fileID: 0}
+  furapiBird: {fileID: 1084445604}
 --- !u!4 &1585958719
 Transform:
   m_ObjectHideFlags: 0
@@ -1671,7 +1675,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press escape to go back to the main menu
+  m_text: 'Press space to replay
+
+
+    Press escape to go back to the main menu'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

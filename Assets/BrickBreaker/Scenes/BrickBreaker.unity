@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6502058ea78784c4d900ac339fd1df1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ref_exit: {fileID: 0}
   brick_prefab: {fileID: 967545095145801209, guid: 52a658865051e644594ffcd1cf5eea24, type: 3}
   ball: {fileID: 1193333138}
   paddle: {fileID: 732291013}
@@ -606,6 +607,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83ede94f2e3b1e0478b924b781c5da4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  appleCatcher: {fileID: 0}
+  brickBreaker: {fileID: 133547168}
+  furapiBird: {fileID: 0}
 --- !u!4 &456014673
 Transform:
   m_ObjectHideFlags: 0
@@ -1816,7 +1820,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Press escape to come back to the main menu
+  m_text: 'Press space to replay
+
+
+    Press escape to come back to the main menu'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 11ad0b14aeb9621489b3637e73f19510, type: 2}
   m_sharedMaterial: {fileID: -1476345538448675198, guid: 11ad0b14aeb9621489b3637e73f19510, type: 2}
@@ -1879,7 +1886,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -3.2531824, y: 0, z: -5.906456, w: 1.5502639}
+  m_margin: {x: -3.2531824, y: 0, z: -5.906456, w: -0.7759681}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -1945,7 +1952,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1.33, y: -8.12}
+  m_AnchoredPosition: {x: -1.33, y: -5.43}
   m_SizeDelta: {x: 19.0034, y: 4.1736}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1423893619
