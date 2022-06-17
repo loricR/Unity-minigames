@@ -38,6 +38,8 @@ public class scriptPanier : MonoBehaviour
 
         //Getting the animator component
         ref_animator = GetComponent<Animator>();
+
+        endText.enabled = false;    //Hide the text while playing
     }
 
     // Update is called once per frame
@@ -103,7 +105,7 @@ public class scriptPanier : MonoBehaviour
     { //Print "Game Over" after the score
         yield return new WaitForSeconds(time_at_the_end);
         displayedText.SetText("GAME OVER");
-        endText.color = new Vector4(0, 0, 0, 255);
+        endText.enabled = true;
     }
 
     public void Increase_speed()
