@@ -80,6 +80,7 @@ GameObject:
   - component: {fileID: 3828303593868760448}
   - component: {fileID: 3828303593868760455}
   - component: {fileID: 3828303593868760449}
+  - component: {fileID: 7648115971611752789}
   m_Layer: 0
   m_Name: Pipe Bottom
   m_TagString: Untagged
@@ -141,7 +142,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 6c073e6405b319e4a801fd96fcfe60da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6c5f3f3dae48d374d873b24d67bf43f4, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -178,6 +179,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5203707, y: 7.1915975}
   m_EdgeRadius: 0
+--- !u!114 &7648115971611752789
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828303593868760451}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e02c5f184af9004d9e44230a7611ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors_array:
+  - {fileID: 21300000, guid: 6c073e6405b319e4a801fd96fcfe60da, type: 3}
+  - {fileID: 21300000, guid: 46fd06bb87c086640bfbbe692e956927, type: 3}
+  - {fileID: 21300000, guid: d0999645fc6c4374aacf0ca3acdadbaa, type: 3}
+  - {fileID: 21300000, guid: 6c5f3f3dae48d374d873b24d67bf43f4, type: 3}
 --- !u!1 &3828303593911013223
 GameObject:
   m_ObjectHideFlags: 0
@@ -189,6 +207,7 @@ GameObject:
   - component: {fileID: 3828303593911013220}
   - component: {fileID: 3828303593911013243}
   - component: {fileID: 3828303593911013221}
+  - component: {fileID: 3522923742683858776}
   m_Layer: 0
   m_Name: Pipe Top
   m_TagString: Untagged
@@ -287,3 +306,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.5203707, y: 7.1953}
   m_EdgeRadius: 0
+--- !u!114 &3522923742683858776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3828303593911013223}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e02c5f184af9004d9e44230a7611ae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  colors_array:
+  - {fileID: 21300000, guid: 6c073e6405b319e4a801fd96fcfe60da, type: 3}
+  - {fileID: 21300000, guid: 46fd06bb87c086640bfbbe692e956927, type: 3}
+  - {fileID: 21300000, guid: d0999645fc6c4374aacf0ca3acdadbaa, type: 3}
+  - {fileID: 21300000, guid: 6c5f3f3dae48d374d873b24d67bf43f4, type: 3}
