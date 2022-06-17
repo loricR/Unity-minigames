@@ -23,8 +23,7 @@ public class Brick : MonoBehaviour
     {
         master_Script.ReportBrickDeath(gameObject);   //Tell to the master script that the brick has been broken
         Vector3 brickPosition = this.transform.position;    //Get the position (x,y,z) of the brick destroyed
-        Destroy(gameObject);
-        if (Random.Range(0, 10) == 1)
+        if (Random.Range(0, 10) == 1)   //10% chance
         {   
             GameObject coin = Instantiate(coin_prefab);
             coin.transform.position = brickPosition;

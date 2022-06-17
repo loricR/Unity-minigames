@@ -12,15 +12,13 @@ public class Ball : MonoBehaviour
     const float BLOCKED_BOOST = 0.1f;
     const float BALL_Y = -4f;
 
-    const int CLIP_PAD = 0;
-    const int CLIP_WALL = 1;
-    const int CLIP_LOSS = 2;
-    const int CLIP_INTRO = 3;
-
     protected Rigidbody2D rgdBody;
     [HideInInspector] public Master master_Script;
     protected AudioSource sound;
-    [SerializeField] protected AudioClip[] clip;
+    [SerializeField] protected AudioClip bouncePad;
+    [SerializeField] protected AudioClip bounceWall;
+    [SerializeField] protected AudioClip pointLoss;
+    [SerializeField] protected AudioClip intro;
     private bool falling;
 
     // Start is called before the first frame update
@@ -28,49 +26,66 @@ public class Ball : MonoBehaviour
     {
         rgdBody = GetComponent<Rigidbody2D>();
         sound = GetComponent<AudioSource>();
-        StartCoroutine(Spawn());
+        if(master_Script.NBBall == 1)
+        {
+            StartCoroutine(Spawn());
+        }
+        else if(master_Script.NBBall > 1)
+        {
+            rgdBody.velocity = new Vector2(0, LAUNCH_SPEED);
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        //Avoid the ball of being blocked horizontally
         if (rgdBody.velocity.y >= 0 && rgdBody.velocity.y <= 0.05)
         {
             rgdBody.AddForce(new Vector2(0, BLOCKED_BOOST));
         }
-        if (rgdBody.velocity.y <= 0 && rgdBody.velocity.y >= -0.05)
+        else if (rgdBody.velocity.y <= 0 && rgdBody.velocity.y >= -0.05)
         {
             rgdBody.AddForce(new Vector2(0, -BLOCKED_BOOST));
         }
 
         if (transform.position.y <= BOTTOM_SCREEN && !falling)
         {
-            master_Script.updateLife();
-            StopAllCoroutines();
-            StartCoroutine(ReSpawn());
-            falling = true;
-            int newScore = master_Script.score - 500;
-            if (newScore >= 0)
+            if(master_Script.NBBall == 1)
             {
-                master_Script.score = newScore;
-                master_Script.displayedScore.SetText("Score : " + master_Script.score);
+                master_Script.updateLife();
+                StopAllCoroutines();
+                StartCoroutine(ReSpawn());
+                falling = true;
+                int newScore = master_Script.score - 500;
+                if (newScore >= 0)
+                {
+                    master_Script.score = newScore;
+                    master_Script.displayedScore.SetText("Score : " + master_Script.score);
+                }
+                else
+                {
+                    master_Script.score = 0;
+                    master_Script.displayedScore.SetText("Score : " + master_Script.score);
+                }
             }
-            else
+            else if(master_Script.NBBall > 1)
             {
-                master_Script.score = 0;
-                master_Script.displayedScore.SetText("Score : " + master_Script.score);
+                Destroy(gameObject);
+                master_Script.reportBonusDeath(gameObject);
             }
         }
 
         if (master_Script.gameOver)
         {
             rgdBody.velocity = new Vector2(0, 0);   //Stop the movement of the ball if the game is over
+            sound.volume = 0;   //Stop the sounds
         }
     }
 
     protected IEnumerator Spawn()
     {
-        sound.clip = clip[CLIP_INTRO];
+        sound.clip = intro;
         sound.Play();
         transform.position = new Vector3(0, BALL_Y, 0);
         rgdBody.velocity = new Vector2(0, 0);
@@ -82,7 +97,7 @@ public class Ball : MonoBehaviour
     protected IEnumerator ReSpawn()
     {
         int second = TIME_SPAWN;
-        sound.clip = clip[CLIP_LOSS];
+        sound.clip = pointLoss;
         sound.Play();
         while (second > 0)
         {
@@ -96,7 +111,7 @@ public class Ball : MonoBehaviour
     {
         if(collision.gameObject.tag == "paddle")
         {
-            sound.clip = clip[CLIP_PAD];
+            sound.clip = bouncePad;
             sound.Play();
             float ballPosition = transform.position.x;
             float paddlePosition = collision.transform.position.x;
@@ -108,19 +123,14 @@ public class Ball : MonoBehaviour
         
         if(collision.gameObject.tag == "wall")
         {
-            sound.clip = clip[CLIP_WALL];
+            sound.clip = bounceWall;
             sound.Play();
         }
 
         if (collision.gameObject.tag == "brick")
         {
-            sound.clip = clip[CLIP_PAD];
+            sound.clip = bouncePad;
             sound.Play();
-        }
-
-        if (collision.gameObject.tag == "coin")
-        {
-            Destroy(collision.gameObject);  //If the ball touch the coin, it destroys the coin
         }
     }
 }

@@ -8,17 +8,35 @@ public class Master : MonoBehaviour
     //Ref to listener_exit script
     [HideInInspector] public listener_exit ref_exit;
 
+    //Prefabs
     [SerializeField] protected GameObject brick_prefab;
-    [SerializeField] public GameObject ball;
-    [SerializeField] protected GameObject paddle;
     [SerializeField] protected GameObject life_prefab;
+    [SerializeField] protected GameObject ball_prefab;
+
+    //Life management
     [HideInInspector] public List<GameObject> remainingLife;
     [HideInInspector] public int NBLife;
-    public List<GameObject> bricks;
+
+    //Balls management
+    const int MAX_BALL = 3;
+    [HideInInspector] public int NBBall;
+    [HideInInspector] public List<GameObject> balls;
+
+    [SerializeField] protected GameObject paddle;
+    [HideInInspector] public List<GameObject> bricks;
+    protected int brickCount;
+
+    //Texts
     public TextMeshPro displayedScore;
     public TextMeshPro endText;
     public TextMeshPro quitText;
+
     [HideInInspector] public bool gameOver;
+    [HideInInspector] public int score;
+    protected AudioSource sound;
+    protected bool soundPlayed = false;
+
+    //Constants
     const int NB_LIFE = 5;
     const float MIN_X = -13.203f;
     const float MAX_Y = 7.52f;
@@ -30,9 +48,6 @@ public class Master : MonoBehaviour
     const float TEXT_SCORE_Y = -1.74f;
     const float LIFE_X = 17.83f;
     const float LIFE_Y = -10.9f;
-    protected int brickCount;
-    [HideInInspector] public int score;
-    protected AudioSource sound;
 
     // Start is called before the first frame update
     void Start()
@@ -50,7 +65,10 @@ public class Master : MonoBehaviour
             remainingLife[i].transform.position = new Vector2(LIFE_X, LIFE_Y + i);
         }
 
+        GameObject ball = Instantiate(ball_prefab); //Create the first ball
         ball.GetComponent<Ball>().master_Script = this;
+        balls.Add(ball);
+        NBBall = 1;
         paddle.GetComponent<Paddle>().master_Script = this;
         sound = GetComponent<AudioSource>();
         
@@ -60,21 +78,23 @@ public class Master : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(brickCount == 0)
+        if(brickCount == 0 && !soundPlayed)
         {
             gameOver = true;
             quitText.enabled = true;
             endText.enabled = true;
             sound.Play();
+            soundPlayed = true; //To play the sound only once
             endText.SetText("VICTORY !");
             displayedScore.transform.position = new Vector2(TEXT_SCORE_X, TEXT_SCORE_Y);
         }
-        else if(NBLife == 0)
+        else if(NBLife == 0 && !soundPlayed)
         {
             gameOver = true;
             quitText.enabled = true;
             endText.enabled = true;
             sound.Play();
+            soundPlayed = true; //To play the sound only once
             endText.SetText("GAME OVER !");
             displayedScore.transform.position = new Vector2(TEXT_SCORE_X, TEXT_SCORE_Y);
         }
@@ -88,14 +108,14 @@ public class Master : MonoBehaviour
     protected void PlaceBricksRandom()
     {
         float palier = 0.6f;
-        for (int i = 0; i < MAX_BRICK_Y; i++)
+        for (int i = 0; i < 2; i++)
         {
             if (i == 3 || i == 6 || i == 9)
             {
                 palier -= 0.1f;
             }
 
-            for (int j = 0; j < MAX_BRICK_X; j++)
+            for (int j = 0; j < 2; j++)
             {
                 if (Random.Range(0f, 1f) <= palier)
                 {
@@ -112,10 +132,37 @@ public class Master : MonoBehaviour
 
     public void ReportBrickDeath(GameObject destroyedBrick)
     {
+        Vector3 bonusPosition = destroyedBrick.transform.position;
         score += 50;
         updateScore();
         bricks.Remove(destroyedBrick);
+        Destroy(destroyedBrick);
         brickCount--;
+        if(Random.Range(0, 20) == 1 && NBBall < MAX_BALL)    //5% chance and max bonus ball on the screen at the same time
+        {
+            NBBall++;
+            GameObject bonus = Instantiate(ball_prefab);
+            balls.Add(bonus);
+            bonus.GetComponent<Ball>().master_Script = this;
+            bonus.transform.position = bonusPosition;
+            for (int i=0; i<NBBall; i++)
+            {
+                for(int j=0; j<NBBall; j++)
+                {
+                    if(i != j)
+                    {
+                        Physics2D.IgnoreCollision(balls[i].GetComponent<CircleCollider2D>(), balls[j].GetComponent<CircleCollider2D>());   //Ignore the collision between the different balls
+                    }
+                }
+            }
+            
+        }
+    }
+
+    public void reportBonusDeath(GameObject destroyedBall)
+    {
+        balls.Remove(destroyedBall);
+        NBBall--;
     }
 
     public void updateScore()

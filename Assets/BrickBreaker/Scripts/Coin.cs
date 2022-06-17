@@ -10,11 +10,13 @@ public class Coin : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Physics2D.IgnoreCollision(master_Script.ball.GetComponent<CircleCollider2D>(), GetComponent<CircleCollider2D>());   //Ignore the collision between the ball and the coin
         foreach(GameObject brick in master_Script.bricks)
         {
-            Physics2D.IgnoreCollision(brick.GetComponent<BoxCollider2D>(), GetComponent<CircleCollider2D>());   //Ignore the collision between the ball and the coin
-
+            Physics2D.IgnoreCollision(brick.GetComponent<BoxCollider2D>(), GetComponent<CircleCollider2D>());   //Ignore the collision between the bricks and the coin
+        }
+        foreach (GameObject ball in master_Script.balls)
+        {
+            Physics2D.IgnoreCollision(ball.GetComponent<CircleCollider2D>(), GetComponent<CircleCollider2D>());   //Ignore the collision between the balls and the coin
         }
     }
 
