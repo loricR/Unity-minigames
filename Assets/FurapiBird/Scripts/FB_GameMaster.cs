@@ -15,6 +15,10 @@ public class FB_GameMaster : MonoBehaviour
     public GameObject Bird;
     private Rigidbody2D rigibBird;
 
+    //Upgrade difficulty
+    private float upgradeGravity = 0.3f;
+    private float upgradeSpeed = 0.3f;
+
     //Position of the obstacles' spawning
     private int PipeSpawnPosX = 10;
 
@@ -98,7 +102,7 @@ public class FB_GameMaster : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space) && gameOver)
-        {
+        { //To replay the game
             StartCoroutine(ref_exit.ReloadScene());
         }
     }
@@ -143,7 +147,7 @@ public class FB_GameMaster : MonoBehaviour
             currentObstacles.Add(newObstacle);
 
             if(seconds == 00 || seconds == 30)
-            {
+            { //The difficulty is upgraded every 30 seconds
                 StartCoroutine(UpgradeDifficulty());
             }
 
@@ -219,8 +223,8 @@ public class FB_GameMaster : MonoBehaviour
 
     protected IEnumerator UpgradeDifficulty()
     {
-        rigibBird.gravityScale = rigibBird.gravityScale + 0.3f;
-        timer = timer - 0.3f;
+        rigibBird.gravityScale = rigibBird.gravityScale + upgradeGravity;
+        timer = timer - upgradeSpeed;
         yield return null;
     }
 
