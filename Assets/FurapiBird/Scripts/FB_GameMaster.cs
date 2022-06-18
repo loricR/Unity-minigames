@@ -152,6 +152,10 @@ public class FB_GameMaster : MonoBehaviour
         {
             obstacle.GetComponent<PipeObstacle_Script>().gameOver();
         }
+        if (!challengeMode)
+        {
+            StartCoroutine("End");
+        }
     }
 
     protected IEnumerator Spawn()
