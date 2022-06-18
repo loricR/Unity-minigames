@@ -112,9 +112,9 @@ public class Master : MonoBehaviour
     {
         if(brickCount == 0 && !soundPlayed)
         {
+            gameOver = true;
             if (!challengeMode)
             {
-                gameOver = true;
                 quitText.enabled = true;
                 endText.enabled = true;
                 sound.Play();
@@ -129,9 +129,9 @@ public class Master : MonoBehaviour
         }
         else if(NBLife == 0 && !soundPlayed)
         {
+            gameOver = true;
             if (!challengeMode)
             {
-                gameOver = true;
                 quitText.enabled = true;
                 endText.enabled = true;
                 sound.Play();
