@@ -9,7 +9,7 @@ public class Ball : MonoBehaviour
     const float TIME_INTRO = 2f;
     const int TIME_SPAWN = 2;
     const int PUISSANCE_DEVIATION = 100;
-    const float BLOCKED_BOOST = 0.1f;
+    const float BLOCKED_BOOST = 0.5f;
     const float BALL_Y = -4f;
 
     protected Rigidbody2D rgdBody;

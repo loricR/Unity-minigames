@@ -27,10 +27,28 @@ public class scriptPanier : MonoBehaviour
 
     const float POSITION_GAME_OVER = 3.33f;
 
+    protected bool challengeMode;
+    protected Challenge challenge;
+    protected bool gameEnded = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject tmp = GameObject.Find("Challenge(Clone)");
+        if (tmp == null) //This GameObject is present only if it's the challenge mode
+        {
+            challengeMode = false;
+        }
+        else if (tmp != null)
+        {
+            challengeMode = true;
+            challenge = tmp.GetComponent<Challenge>();
+        }
+        else
+        {
+            challengeMode = false;
+        }
+
         //Setting the sound ready to play
         son = GetComponent<AudioSource>();
         son.loop = false;
@@ -90,15 +108,25 @@ public class scriptPanier : MonoBehaviour
             //Update the score
             score++;
             displayedText.SetText("Score : " + score);
+            if (challengeMode)
+            {
+                challenge.totalScore++;
+                challenge.displayedScore.SetText("Score : " + challenge.totalScore);
+            }
             son.Play();
         }
     }
 
     public void GamerOver()
-    { //Print the score in big in the center
-        displayedText.transform.position = new Vector3(0, POSITION_GAME_OVER, 0);
-        //displayedText.transform.localScale = new Vector3(3, 3, 3);
-        StartCoroutine("GameOverMessage");
+    {
+        if (!challengeMode)
+        {
+            endText.enabled = true;
+            //Print the score in big in the center
+            displayedText.transform.position = new Vector3(0, POSITION_GAME_OVER, 0);
+            //displayedText.transform.localScale = new Vector3(3, 3, 3);
+            StartCoroutine("GameOverMessage");
+        }
     }
 
     IEnumerator GameOverMessage()

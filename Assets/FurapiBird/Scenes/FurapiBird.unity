@@ -612,6 +612,7 @@ MonoBehaviour:
   musique: {fileID: 8300000, guid: 543cc75dcdf3255408b12d7ede65b4d0, type: 3}
   hitten: {fileID: 8300000, guid: fd1cb69a7eab4b44486df0dc1926cbc0, type: 3}
   EndSound: {fileID: 8300000, guid: 60bfaf946f75ffe4e8512d42fcaf71fd, type: 3}
+  scoreChallenge: {fileID: 0}
 --- !u!4 &1084445605
 Transform:
   m_ObjectHideFlags: 0
