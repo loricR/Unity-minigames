@@ -3,17 +3,27 @@ Welcome to the LP2B project of Baptiste FANJOUX and Loric RAVASSARD !
 -----------------------------------------------------------
 Here are the controls of each games:
 
+MAIN MENU :
+You have 4 choices :
+- Apple Catcher mini game
+- Brick breacker mini Game
+- Furapi Bird mini Game
+- Challenge mode
+
 APPLE CATCHER:
+You have to catch as many apples as possible
 - RIGHT and LEFT arrow keys to go to the right and to the left
 - ESCAPE to go back to the main menu
 - (When the game is over) SPACE to replay
 
 BRICK BREAKER:
+You have to breack every bricks
 - RIGHT and LEFT arrow keys to go to the right and to the left
 - ESCAPE to go back to the main menu
 - (When the game is over) SPACE to replay
 
 FURAPI BIRD:
+You have to pass as many obstacles as possible
 - SPACE or UP arrow key to move the bird up
 - ESCAPE to go back to the main menu
 - (When the game is over) SPACE to replay
@@ -23,7 +33,7 @@ FURAPI BIRD:
 We made all the expected features of every game, and all the features suggested at the end of the slides.
 
 -----------------------------------------------------------
-Here are the suggested (not mandatory) features:
+Here are the suggested (not mandatory) features we did:
 
 APPLE CATCHER:
 - Apple creation randomized
