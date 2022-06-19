@@ -67,7 +67,7 @@ public class FB_GameMaster : MonoBehaviour
     //Challenge mode
     protected bool challengeMode;
     protected Challenge challenge;
-    const float TOTAL_SCORE_X = -6.68f;
+    const float TOTAL_SCORE_X = -3.18f;
     const float TOTAL_SCORE_Y = 3.08f;
     const float TIMER_X = 6.35f;
     const float TIMER_Y = 3.26f;
@@ -89,8 +89,8 @@ public class FB_GameMaster : MonoBehaviour
             challenge = tmp.GetComponent<Challenge>();
             challenge.displayedScore.transform.position = new Vector3(TOTAL_SCORE_X, TOTAL_SCORE_Y, 0);
             challenge.timer.transform.position = new Vector3(TIMER_X, TIMER_Y, 0);
-            challenge.displayedScore.color = new Color(1, 1, 1);
-            challenge.timer.color = new Color(1, 1, 1);
+            challenge.displayedScore.color = new Color(1, 1, 1, 1);
+            challenge.timer.color = new Color(1, 1, 1, 1);
         }
         else
         {
@@ -162,6 +162,10 @@ public class FB_GameMaster : MonoBehaviour
         if (!challengeMode)
         {
             StartCoroutine("End");
+        }
+        else if (!soundPlayed)
+        {
+            soundPlayed = true;
             ref_audioSource_music.Stop();
             ref_audioSource_hitten.Play();
         }

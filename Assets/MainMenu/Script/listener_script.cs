@@ -160,11 +160,11 @@ public class listener_script : MonoBehaviour
         }
 
         Instantiate(challenge);
-
+        
         //Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
         {
             yield return null;
-        }
+        } 
     }
 }
