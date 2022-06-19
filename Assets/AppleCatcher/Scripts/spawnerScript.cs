@@ -37,7 +37,7 @@ public class spawnerScript : MonoBehaviour
 
     protected bool challengeMode;
     protected Challenge challenge;
-    const float TOTAL_SCORE_X = -7.18f;
+    const float TOTAL_SCORE_X = -4.14f;
     const float TOTAL_SCORE_Y = 3.1f;
     const float TIMER_X = 7.56f;
     const float TIMER_Y = 3.1f;
@@ -58,9 +58,9 @@ public class spawnerScript : MonoBehaviour
             challengeMode = true;
             challenge = tmp.GetComponent<Challenge>();
             challenge.displayedScore.transform.position = new Vector3(TOTAL_SCORE_X, TOTAL_SCORE_Y, 0);
-            challenge.displayedScore.color = new Color(0, 0, 0);
+            challenge.displayedScore.color = new Color(0, 0, 0, 1);
             challenge.timer.transform.position = new Vector3(TIMER_X, TIMER_Y, 0);
-            challenge.timer.color = new Color(0, 0, 0);
+            challenge.timer.color = new Color(0, 0, 0, 1);
         }
         else
         {

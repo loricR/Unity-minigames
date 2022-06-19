@@ -74,8 +74,8 @@ public class Master : MonoBehaviour
             displayedScore.transform.position = new Vector3(DISPLAY_SCORE_X, DISPLAY_SCORE_Y, 0);
             challenge.displayedScore.transform.position = new Vector3(0, TOTAL_SCORE_Y, 0);
             challenge.timer.transform.position = new Vector3(TIMER_X, TIMER_Y, 0);
-            challenge.displayedScore.color = new Color(1, 1, 1);
-            challenge.timer.color = new Color(1, 1, 1);
+            challenge.displayedScore.color = new Color(1, 1, 1, 1);
+            challenge.timer.color = new Color(1, 1, 1, 1);
         }
         else
         {

@@ -200,7 +200,7 @@ Transform:
   m_GameObject: {fileID: 110954364}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 10}
-  m_LocalScale: {x: 0.927, y: 0.927, z: 1}
+  m_LocalScale: {x: 0.927, y: 0.92700005, z: 1}
   m_Children:
   - {fileID: 1950357682}
   - {fileID: 2132994670}
@@ -612,6 +612,7 @@ MonoBehaviour:
   musique: {fileID: 8300000, guid: 543cc75dcdf3255408b12d7ede65b4d0, type: 3}
   hitten: {fileID: 8300000, guid: fd1cb69a7eab4b44486df0dc1926cbc0, type: 3}
   EndSound: {fileID: 8300000, guid: 60bfaf946f75ffe4e8512d42fcaf71fd, type: 3}
+  easterEgg: 0
 --- !u!4 &1084445605
 Transform:
   m_ObjectHideFlags: 0
