@@ -27,7 +27,7 @@ You have to pass as many obstacles as possible
 - SPACE or UP arrow key to move the bird up
 - ESCAPE to go back to the main menu
 - (When the game is over) SPACE to replay
-+ Easter egg (ESCAPE and SPACE at the same time)
++ Easter egg (UP arrow key and SPACE at the same time)
 -----------------------------------------------------------
 
 We made all the expected features of every game, and all the features suggested at the end of the slides.
