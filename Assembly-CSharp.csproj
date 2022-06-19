@@ -59,6 +59,7 @@
     <Compile Include="Assets\BrickBreaker\Scripts\listener_brickbreaker.cs" />
     <Compile Include="Assets\listener_exit.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Coin.cs" />
+    <Compile Include="Assets\FurapiBird\Scripts\randomColorPipe.cs" />
     <Compile Include="Assets\AppleCatcher\Scripts\scriptPanier.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Master.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Ball.cs" />
@@ -73,7 +74,6 @@
     <Compile Include="Assets\FurapiBird\Scripts\FB_menuListener.cs" />
     <Compile Include="Assets\AppleCatcher\Scripts\spawnerScript.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Paddle.cs" />
-    <Compile Include="Assets\FurapiBird\Scripts\randomColorPipe.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
