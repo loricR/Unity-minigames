@@ -20,7 +20,7 @@ FURAPI BIRD:
 + Easter egg (ESCAPE and SPACE at the same time)
 -----------------------------------------------------------
 
-We made all the expected features of every games, and all the features suggested at the end of the slides.
+We made all the expected features of every game, and all the features suggested at the end of the slides.
 
 -----------------------------------------------------------
 Here are the suggested (not mandatory) features:
@@ -38,7 +38,7 @@ FURAPI BIRD:
 - Music and sound
 - Speed of the pipes increasing
 - Color of the pipes randomized
-- All movement stoped when the player dies
+- All movements stopped when the player dies
 
 -----------------------------------------------------------
 Here are some features we added:
@@ -52,5 +52,5 @@ BRICK BREAKER:
 
 CHALLENGE MODE:
 This is another choice of game when the player is in the main menu.
-It lauches a random game. When the player loses at one game it lauches another game (random between the two others).
-The player have 5 minutes (timer present on the screeen) to get as much point as possible.
+It launches a random game amoung the 3 existing. When the player loses at one game it launches another one (random between the two others).
+The player has 5 minutes (timer visible on the screen) to get as much points as possible.
