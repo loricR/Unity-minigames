@@ -48,10 +48,42 @@ public class Master : MonoBehaviour
     const float TEXT_SCORE_Y = -1.74f;
     const float LIFE_X = 17.83f;
     const float LIFE_Y = -10.9f;
+    const float DISPLAY_SCORE_X = -1.33f;
+    const float DISPLAY_SCORE_Y = 9.94f;
+    const float TOTAL_SCORE_Y = 9.2f;
+    const float TIMER_X = 17.65f;
+    const float TIMER_Y = 9.75f;
+
+    protected bool challengeMode;
+    protected Challenge challenge;
+    protected bool gameEnded = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject tmp = GameObject.Find("Challenge(Clone)");
+        if (tmp == null) //This GameObject is present only if it's the challenge mode
+        {
+            challengeMode = false;
+        }
+        else if (tmp != null)
+        {
+            challengeMode = true;
+            challenge = tmp.GetComponent<Challenge>();
+            displayedScore.fontSize = 12;
+            displayedScore.transform.position = new Vector3(DISPLAY_SCORE_X, DISPLAY_SCORE_Y, 0);
+            challenge.displayedScore.transform.position = new Vector3(0, TOTAL_SCORE_Y, 0);
+            challenge.timer.transform.position = new Vector3(TIMER_X, TIMER_Y, 0);
+            challenge.displayedScore.color = new Color(1, 1, 1);
+            challenge.timer.color = new Color(1, 1, 1);
+        }
+        else
+        {
+            challengeMode = false;
+        }
+
+        //Start the challenge timer
+
         NBLife = NB_LIFE;
         gameOver = false;
         endText.enabled = false;
@@ -81,25 +113,40 @@ public class Master : MonoBehaviour
         if(brickCount == 0 && !soundPlayed)
         {
             gameOver = true;
-            quitText.enabled = true;
-            endText.enabled = true;
-            sound.Play();
-            soundPlayed = true; //To play the sound only once
-            endText.SetText("VICTORY !");
-            displayedScore.transform.position = new Vector2(TEXT_SCORE_X, TEXT_SCORE_Y);
+            if (!challengeMode)
+            {
+                quitText.enabled = true;
+                endText.enabled = true;
+                sound.Play();
+                soundPlayed = true; //To play the sound only once
+                endText.SetText("VICTORY !");
+                displayedScore.transform.position = new Vector2(TEXT_SCORE_X, TEXT_SCORE_Y);
+            }
+            else
+            {
+                PlaceBricksRandom();    //Restart a random level if finished in challenge mode
+            }
         }
         else if(NBLife == 0 && !soundPlayed)
         {
             gameOver = true;
-            quitText.enabled = true;
-            endText.enabled = true;
-            sound.Play();
-            soundPlayed = true; //To play the sound only once
-            endText.SetText("GAME OVER !");
-            displayedScore.transform.position = new Vector2(TEXT_SCORE_X, TEXT_SCORE_Y);
+            if (!challengeMode)
+            {
+                quitText.enabled = true;
+                endText.enabled = true;
+                sound.Play();
+                soundPlayed = true; //To play the sound only once
+                endText.SetText("GAME OVER !");
+                displayedScore.transform.position = new Vector2(TEXT_SCORE_X, TEXT_SCORE_Y);
+            }
         }
 
-        if (Input.GetKey(KeyCode.Space) && gameOver)
+        if (gameOver && challengeMode && !gameEnded)
+        {
+            StartCoroutine(ref_exit.LoadRandom());
+            gameEnded = true;
+        }
+        else if (Input.GetKey(KeyCode.Space) && gameOver && !challengeMode)
         {
             StartCoroutine(ref_exit.ReloadScene());
         }
@@ -108,14 +155,14 @@ public class Master : MonoBehaviour
     protected void PlaceBricksRandom()
     {
         float palier = 0.6f;
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < MAX_BRICK_Y; i++)
         {
             if (i == 3 || i == 6 || i == 9)
             {
                 palier -= 0.1f;
             }
 
-            for (int j = 0; j < 2; j++)
+            for (int j = 0; j < MAX_BRICK_X; j++)
             {
                 if (Random.Range(0f, 1f) <= palier)
                 {
@@ -135,6 +182,11 @@ public class Master : MonoBehaviour
         Vector3 bonusPosition = destroyedBrick.transform.position;
         score += 50;
         updateScore();
+        if (challengeMode)
+        {
+            challenge.totalScore++;
+            challenge.displayedScore.SetText("Score : " + challenge.totalScore);
+        }
         bricks.Remove(destroyedBrick);
         Destroy(destroyedBrick);
         brickCount--;
@@ -170,7 +222,18 @@ public class Master : MonoBehaviour
         displayedScore.SetText("Score : " + score);
     }
 
-    public void updateLife()
+    public void coinCatched()   //Called when the paddle catch a coin
+    {
+        score += 100;
+        updateScore();
+        if (challengeMode)
+        {
+            challenge.totalScore += 5;
+            challenge.displayedScore.SetText("Score : " + challenge.totalScore);
+        }
+    }
+
+    public void updateLife()    //Called when a ball falls
     {
         int sizeLife = remainingLife.Count;
         if (sizeLife - 1 > 0)

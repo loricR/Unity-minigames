@@ -4,6 +4,7 @@ ScriptsOnlyBuild:
     - Ball
     - Bird_script
     - Brick
+    - Challenge
     - Coin
     - FB_GameMaster
     - FB_menuListener
@@ -37,6 +38,12 @@ ScriptsOnlyBuild:
     - TMPro.TMP_SpriteAsset
     - TMPro.TMP_StyleSheet
     - TMPro.TextMeshPro
+    UnityEditor.Graphs.dll:
+    - UnityEditor.Graphs.AnimationBlendTree.Graph
+    - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.Graph
+    - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
+    - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -89,20 +96,18 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1940}
+      Script: {instanceID: 1864}
     - Class: 114
-      Script: {instanceID: 2320}
+      Script: {instanceID: 2244}
     - Class: 114
-      Script: {instanceID: 2572}
+      Script: {instanceID: 2496}
     - Class: 114
-      Script: {instanceID: 3946}
+      Script: {instanceID: 3870}
     - Class: 114
-      Script: {instanceID: 4162}
+      Script: {instanceID: 4086}
     - Class: 114
-      Script: {instanceID: 4992}
+      Script: {instanceID: 4918}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -140,18 +145,16 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1940}
+      Script: {instanceID: 1864}
     - Class: 114
-      Script: {instanceID: 2964}
+      Script: {instanceID: 2888}
     - Class: 114
-      Script: {instanceID: 3450}
+      Script: {instanceID: 3374}
     - Class: 114
-      Script: {instanceID: 4162}
+      Script: {instanceID: 4086}
     - Class: 114
-      Script: {instanceID: 4272}
+      Script: {instanceID: 4196}
     - Class: 115
-      Script: {instanceID: 0}
-    - Class: 128
       Script: {instanceID: 0}
     - Class: 157
       Script: {instanceID: 0}
@@ -199,21 +202,21 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1940}
+      Script: {instanceID: 1864}
     - Class: 114
-      Script: {instanceID: 2320}
+      Script: {instanceID: 2244}
     - Class: 114
-      Script: {instanceID: 2372}
+      Script: {instanceID: 2296}
     - Class: 114
-      Script: {instanceID: 3414}
+      Script: {instanceID: 3338}
     - Class: 114
-      Script: {instanceID: 3484}
+      Script: {instanceID: 3408}
     - Class: 114
-      Script: {instanceID: 4162}
+      Script: {instanceID: 4086}
     - Class: 114
-      Script: {instanceID: 4424}
+      Script: {instanceID: 4348}
     - Class: 114
-      Script: {instanceID: 5140}
+      Script: {instanceID: 5066}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 157
@@ -252,11 +255,11 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1762}
+      Script: {instanceID: 1686}
     - Class: 114
-      Script: {instanceID: 1940}
+      Script: {instanceID: 1864}
     - Class: 114
-      Script: {instanceID: 4162}
+      Script: {instanceID: 4086}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -297,11 +300,11 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1940}
+      Script: {instanceID: 1864}
     - Class: 114
-      Script: {instanceID: 4162}
+      Script: {instanceID: 4086}
     - Class: 114
-      Script: {instanceID: 4968}
+      Script: {instanceID: 4894}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -346,17 +349,17 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1940}
+      Script: {instanceID: 1864}
     - Class: 114
-      Script: {instanceID: 2320}
+      Script: {instanceID: 2244}
     - Class: 114
-      Script: {instanceID: 3714}
+      Script: {instanceID: 3638}
     - Class: 114
-      Script: {instanceID: 3794}
+      Script: {instanceID: 3718}
     - Class: 114
-      Script: {instanceID: 4040}
+      Script: {instanceID: 3964}
     - Class: 114
-      Script: {instanceID: 4162}
+      Script: {instanceID: 4086}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -380,6 +383,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 0}
     - Class: 21
       Script: {instanceID: 0}
+    - Class: 23
+      Script: {instanceID: 0}
     - Class: 28
       Script: {instanceID: 0}
     - Class: 48
@@ -399,27 +404,31 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 1618}
+      Script: {instanceID: 1542}
     - Class: 114
-      Script: {instanceID: 1940}
+      Script: {instanceID: 1864}
     - Class: 114
-      Script: {instanceID: 2348}
+      Script: {instanceID: 2272}
     - Class: 114
-      Script: {instanceID: 2792}
+      Script: {instanceID: 2716}
     - Class: 114
-      Script: {instanceID: 2964}
+      Script: {instanceID: 2888}
     - Class: 114
-      Script: {instanceID: 3200}
+      Script: {instanceID: 3124}
     - Class: 114
-      Script: {instanceID: 3450}
+      Script: {instanceID: 3374}
     - Class: 114
-      Script: {instanceID: 3572}
+      Script: {instanceID: 3496}
     - Class: 114
-      Script: {instanceID: 4656}
+      Script: {instanceID: 4086}
     - Class: 114
-      Script: {instanceID: 4990}
+      Script: {instanceID: 4580}
     - Class: 114
-      Script: {instanceID: 5398}
+      Script: {instanceID: 4842}
+    - Class: 114
+      Script: {instanceID: 4916}
+    - Class: 114
+      Script: {instanceID: 5324}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -541,7 +550,7 @@ ScriptsOnlyBuild:
     className: SpriteSkinUpdateHelper
   - hash:
       serializedVersion: 2
-      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+      Hash: 4d6a18ea20c29e1731594ced9e7618ec
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: listener_exit
@@ -679,7 +688,7 @@ ScriptsOnlyBuild:
     className: TestResultRendererCallback
   - hash:
       serializedVersion: 2
-      Hash: 9545085bb009bcbf11f10efa010976ae
+      Hash: c39fcbd5f124345cff90590c369455fd
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Master
@@ -709,7 +718,7 @@ ScriptsOnlyBuild:
     className: MarkerTrack
   - hash:
       serializedVersion: 2
-      Hash: c69d566a78a68a755990bc9f02da3e1c
+      Hash: 0bd225ae2d1b76b62d6c5c97deec5a36
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Ball
@@ -751,7 +760,7 @@ ScriptsOnlyBuild:
     className: PipeObstacle_Script
   - hash:
       serializedVersion: 2
-      Hash: 0debf7a6828508e64afec5733024ad46
+      Hash: 8eba480147bb3d0d4ad6e301a587d796
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FB_GameMaster
@@ -901,7 +910,7 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
-      Hash: 7a48e60acf1ab4fe947c42ab8f94a11d
+      Hash: f113285064f35e081326a05624e1e05f
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: listener_script
@@ -949,6 +958,12 @@ ScriptsOnlyBuild:
     className: PhysicsRaycaster
   - hash:
       serializedVersion: 2
+      Hash: bcdf3dd5be9823863f9b1dda141449e4
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Challenge
+  - hash:
+      serializedVersion: 2
       Hash: 0fb27be807aa299702f28ad0bcad1f46
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
@@ -973,7 +988,7 @@ ScriptsOnlyBuild:
     className: TMP_Settings
   - hash:
       serializedVersion: 2
-      Hash: 918ecec58af8e40524c2fbea5c5d782e
+      Hash: c05157289003538c1fa93c761665a4d4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: spawnerScript

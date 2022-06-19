@@ -7,7 +7,7 @@ public class scriptPanier : MonoBehaviour
 {
     //speed of the basket
     private float speed = 13.0f;
-    private float increasing_speed = 1;
+    const float INCREASING_SPEED = 1f;
 
     //Score
     private int score = 0;
@@ -23,14 +23,32 @@ public class scriptPanier : MonoBehaviour
     private float speed_last_frame = 0;
 
     //Time before writing "Game Over"
-    private float time_at_the_end = 3;
+    const float TIME_AT_THE_END = 4f;
 
     const float POSITION_GAME_OVER = 3.33f;
 
+    protected bool challengeMode;
+    protected Challenge challenge;
+    protected bool gameEnded = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject tmp = GameObject.Find("Challenge(Clone)");
+        if (tmp == null) //This GameObject is present only if it's the challenge mode
+        {
+            challengeMode = false;
+        }
+        else if (tmp != null)
+        {
+            challengeMode = true;
+            challenge = tmp.GetComponent<Challenge>();
+        }
+        else
+        {
+            challengeMode = false;
+        }
+
         //Setting the sound ready to play
         son = GetComponent<AudioSource>();
         son.loop = false;
@@ -90,27 +108,41 @@ public class scriptPanier : MonoBehaviour
             //Update the score
             score++;
             displayedText.SetText("Score : " + score);
+            if (challengeMode)
+            {
+                challenge.totalScore++;
+                challenge.displayedScore.SetText("Score : " + challenge.totalScore);
+            }
             son.Play();
         }
     }
 
     public void GamerOver()
-    { //Print the score in big in the center
-        displayedText.transform.position = new Vector3(0, POSITION_GAME_OVER, 0);
-        //displayedText.transform.localScale = new Vector3(3, 3, 3);
-        StartCoroutine("GameOverMessage");
+    {
+        GameObject[] applesClone = GameObject.FindGameObjectsWithTag("pomme");  //Get all the apples
+        foreach (GameObject a in applesClone)   //Destroy all the apples
+        {
+            Destroy(a); 
+        }
+
+        if (!challengeMode)
+        {
+            endText.enabled = true;
+            //Print the score in big in the center
+            displayedText.transform.position = new Vector3(0, POSITION_GAME_OVER, 0);
+            StartCoroutine("GameOverMessage");
+        }
     }
 
     IEnumerator GameOverMessage()
     { //Print "Game Over" after the score
-        yield return new WaitForSeconds(time_at_the_end);
+        yield return new WaitForSeconds(TIME_AT_THE_END);
         displayedText.SetText("GAME OVER");
         endText.enabled = true;
     }
 
     public void Increase_speed()
     { //Increase the speed to increase dificulty
-        speed = speed + increasing_speed;
+        speed += INCREASING_SPEED;
     }
-
 }

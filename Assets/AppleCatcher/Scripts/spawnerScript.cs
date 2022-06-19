@@ -18,7 +18,7 @@ public class spawnerScript : MonoBehaviour
 
     //Variables for the increasing difficulty
     private int nb_apple_spawn = 0;
-    private float gravityScaleApples = 1;
+    private float gravityScaleApples = 1f;
     private float increasing_gravity_apples = 0.5f;
 
     //Variables for generating random position
@@ -35,9 +35,38 @@ public class spawnerScript : MonoBehaviour
     private GameObject ref_life2;
     private GameObject ref_life3;
 
+    protected bool challengeMode;
+    protected Challenge challenge;
+    const float TOTAL_SCORE_X = -7.18f;
+    const float TOTAL_SCORE_Y = 3.1f;
+    const float TIMER_X = 7.56f;
+    const float TIMER_Y = 3.1f;
+    protected bool gameEnded;
+
+    private Coroutine spawnCoroutine;
+
     // Start is called before the first frame update
     void Start()
     {
+        GameObject tmp = GameObject.Find("Challenge(Clone)");
+        if (tmp == null) //This GameObject is present only if it's the challenge mode
+        {
+            challengeMode = false;
+        }
+        else if (tmp != null)
+        {
+            challengeMode = true;
+            challenge = tmp.GetComponent<Challenge>();
+            challenge.displayedScore.transform.position = new Vector3(TOTAL_SCORE_X, TOTAL_SCORE_Y, 0);
+            challenge.displayedScore.color = new Color(0, 0, 0);
+            challenge.timer.transform.position = new Vector3(TIMER_X, TIMER_Y, 0);
+            challenge.timer.color = new Color(0, 0, 0);
+        }
+        else
+        {
+            challengeMode = false;
+        }
+
         //Creation of the lives' hearths at the top right
         GameObject life1 = Instantiate(Life);
         ref_life1 = life1;
@@ -61,13 +90,18 @@ public class spawnerScript : MonoBehaviour
         music.Play();
 
         //starting the spawning coroutine
-        StartCoroutine(Spawn());
+        spawnCoroutine = StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Space) && gameOver)
+        if (gameOver && challengeMode && !gameEnded)
+        {
+            StartCoroutine(ref_exit.LoadRandom());
+            gameEnded = true;
+        }
+        else if (Input.GetKey(KeyCode.Space) && gameOver && !challengeMode)
         {
             StartCoroutine(ref_exit.ReloadScene());
         }
@@ -90,8 +124,8 @@ public class spawnerScript : MonoBehaviour
             gameOver = true;
             Destroy(ref_life1.gameObject);
             Panier.GetComponent<scriptPanier>().GamerOver();
+            StopCoroutine(spawnCoroutine);  //Stop the spawner to avoid a last apple spawning
         }
-
     }
 
     protected IEnumerator Spawn()

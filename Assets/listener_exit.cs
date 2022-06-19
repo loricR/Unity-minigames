@@ -60,4 +60,55 @@ public class listener_exit : MonoBehaviour
             yield return null;
         }
     }
+
+    public IEnumerator LoadRandom()
+    {
+        yield return new WaitForSeconds(3);
+
+        Scene scene = SceneManager.GetActiveScene();
+        int rand = Random.Range(0, 2);
+        AsyncOperation asyncLoad;
+        switch (scene.name)
+        {
+            case "Game":
+                if(rand == 0)
+                {
+                    asyncLoad = SceneManager.LoadSceneAsync("BrickBreaker");
+                }
+                else
+                {
+                    asyncLoad = SceneManager.LoadSceneAsync("FurapiBird");
+                }
+                break;
+            case "BrickBreaker":
+                if (rand == 0)
+                {
+                    asyncLoad = SceneManager.LoadSceneAsync("Game");
+                }
+                else
+                {
+                    asyncLoad = SceneManager.LoadSceneAsync("FurapiBird");
+                }
+                break;
+            case "FurapiBird":
+                if (rand == 0)
+                {
+                    asyncLoad = SceneManager.LoadSceneAsync("Game");
+                }
+                else
+                {
+                    asyncLoad = SceneManager.LoadSceneAsync("BrickBreaker");
+                }
+                break;
+            default:
+                asyncLoad = SceneManager.LoadSceneAsync(scene.name);
+                break;
+        }
+
+        //Wait until the asynchronous scene fully loads
+        while (!asyncLoad.isDone)
+        {
+            yield return null;
+        }
+    }
 }

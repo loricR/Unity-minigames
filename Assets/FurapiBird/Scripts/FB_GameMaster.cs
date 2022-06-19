@@ -64,10 +64,36 @@ public class FB_GameMaster : MonoBehaviour
     private AudioSource ref_audioSource_endsound;
     private bool soundPlayed = false;
 
+    protected bool challengeMode;
+    protected Challenge challenge;
+    const float TOTAL_SCORE_X = -6.68f;
+    const float TOTAL_SCORE_Y = 3.08f;
+    const float TIMER_X = 6.35f;
+    const float TIMER_Y = 3.26f;
+    protected bool gameEnded = false;
 
     // Start is called before the first frame update
     void Start()
     {
+        GameObject tmp = GameObject.Find("Challenge(Clone)");
+        if (tmp == null) //This GameObject is present only if it's the challenge mode
+        {
+            challengeMode = false;
+        }
+        else if (tmp != null)
+        {
+            challengeMode = true;
+            challenge = tmp.GetComponent<Challenge>();
+            challenge.displayedScore.transform.position = new Vector3(TOTAL_SCORE_X, TOTAL_SCORE_Y, 0);
+            challenge.timer.transform.position = new Vector3(TIMER_X, TIMER_Y, 0);
+            challenge.displayedScore.color = new Color(1, 1, 1);
+            challenge.timer.color = new Color(1, 1, 1);
+        }
+        else
+        {
+            challengeMode = false;
+        }
+
         //Getting access to the rigidbody of the bird
         rigibBird = Bird.GetComponent<Rigidbody2D>();
 
@@ -101,8 +127,13 @@ public class FB_GameMaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && gameOver)
-        { //To replay the game
+        if (gameOver && challengeMode && !gameEnded)
+        {
+            StartCoroutine(ref_exit.LoadRandom());
+            gameEnded = true;
+        }
+        else if(Input.GetKeyDown(KeyCode.Space) && gameOver && !challengeMode)
+        {
             StartCoroutine(ref_exit.ReloadScene());
         }
     }
@@ -111,16 +142,24 @@ public class FB_GameMaster : MonoBehaviour
     { //Update the score
         score = score + 1;
         displayedScore.SetText("Score : " + score);
+        if (challengeMode)
+        {
+            challenge.totalScore++;
+            challenge.displayedScore.SetText("Score : " + challenge.totalScore);
+        }
     }
 
     public void GameOver()
-    { //Stop all the obstacles
+    {//Stop all the obstacles
         gameOver = true;
-        foreach(GameObject obstacle in currentObstacles)
+        foreach (GameObject obstacle in currentObstacles)
         {
             obstacle.GetComponent<PipeObstacle_Script>().gameOver();
         }
-        StartCoroutine("End");
+        if (!challengeMode)
+        {
+            StartCoroutine("End");
+        }
     }
 
     protected IEnumerator Spawn()

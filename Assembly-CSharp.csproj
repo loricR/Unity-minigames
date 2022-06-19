@@ -69,6 +69,7 @@
     <Compile Include="Assets\AppleCatcher\Scripts\TitleScript.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Brick.cs" />
     <Compile Include="Assets\MainMenu\Script\listener_script.cs" />
+    <Compile Include="Assets\MainMenu\Script\Challenge.cs" />
     <Compile Include="Assets\FurapiBird\Scripts\FB_menuListener.cs" />
     <Compile Include="Assets\AppleCatcher\Scripts\spawnerScript.cs" />
     <Compile Include="Assets\BrickBreaker\Scripts\Paddle.cs" />

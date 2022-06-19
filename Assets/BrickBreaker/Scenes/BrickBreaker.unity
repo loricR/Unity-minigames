@@ -167,6 +167,7 @@ MonoBehaviour:
   displayedScore: {fileID: 850523230}
   endText: {fileID: 172903946}
   quitText: {fileID: 1330672750}
+  scoreChallenge: {fileID: 0}
   gameOver: 0
   score: 0
 --- !u!4 &133547169

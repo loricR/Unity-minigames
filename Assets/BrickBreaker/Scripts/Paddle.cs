@@ -34,8 +34,7 @@ public class Paddle : MonoBehaviour
     {
         if(collision.gameObject.tag == "coin")
         {
-            master_Script.score += 100;
-            master_Script.updateScore();
+            master_Script.coinCatched();
             sound.Play();
             Destroy(collision.gameObject);  //Destroy the coin
         }

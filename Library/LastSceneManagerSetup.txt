@@ -1,5 +1,9 @@
 sceneSetups:
+<<<<<<< HEAD
 - path: Assets/FurapiBird/Scenes/FurapiBird.unity
+=======
+- path: Assets/MainMenu/Scene/MainMenu.unity
+>>>>>>> challenge-mode
   isLoaded: 1
   isActive: 1
   isSubScene: 0
