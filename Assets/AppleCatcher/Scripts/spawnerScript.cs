@@ -18,7 +18,7 @@ public class spawnerScript : MonoBehaviour
 
     //Variables for the increasing difficulty
     private int nb_apple_spawn = 0;
-    private float gravityScaleApples = 1;
+    private float gravityScaleApples = 1f;
     private float increasing_gravity_apples = 0.5f;
 
     //Variables for generating random position
@@ -42,6 +42,8 @@ public class spawnerScript : MonoBehaviour
     const float TIMER_X = 7.56f;
     const float TIMER_Y = 3.1f;
     protected bool gameEnded;
+
+    private Coroutine spawnCoroutine;
 
     // Start is called before the first frame update
     void Start()
@@ -88,7 +90,7 @@ public class spawnerScript : MonoBehaviour
         music.Play();
 
         //starting the spawning coroutine
-        StartCoroutine(Spawn());
+        spawnCoroutine = StartCoroutine(Spawn());
     }
 
     // Update is called once per frame
@@ -122,8 +124,8 @@ public class spawnerScript : MonoBehaviour
             gameOver = true;
             Destroy(ref_life1.gameObject);
             Panier.GetComponent<scriptPanier>().GamerOver();
+            StopCoroutine(spawnCoroutine);  //Stop the spawner to avoid a last apple spawning
         }
-
     }
 
     protected IEnumerator Spawn()
