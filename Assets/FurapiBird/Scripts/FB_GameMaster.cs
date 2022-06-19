@@ -64,6 +64,7 @@ public class FB_GameMaster : MonoBehaviour
     private AudioSource ref_audioSource_endsound;
     private bool soundPlayed = false;
 
+    //Challenge mode
     protected bool challengeMode;
     protected Challenge challenge;
     const float TOTAL_SCORE_X = -6.68f;
@@ -71,6 +72,8 @@ public class FB_GameMaster : MonoBehaviour
     const float TIMER_X = 6.35f;
     const float TIMER_Y = 3.26f;
     protected bool gameEnded = false;
+
+    public bool easterEgg = false;
 
     // Start is called before the first frame update
     void Start()
@@ -159,6 +162,8 @@ public class FB_GameMaster : MonoBehaviour
         if (!challengeMode)
         {
             StartCoroutine("End");
+            ref_audioSource_music.Stop();
+            ref_audioSource_hitten.Play();
         }
     }
 
@@ -184,6 +189,7 @@ public class FB_GameMaster : MonoBehaviour
             newObstacle.GetComponent<PipeObstacle_Script>().ref_spawner = this;
             newObstacle.transform.position = new Vector3(PipeSpawnPosX, randomValue, 0);
             currentObstacles.Add(newObstacle);
+            newObstacle.GetComponent<PipeObstacle_Script>().refGameMaster = this;
 
             if(seconds == 00 || seconds == 30)
             { //The difficulty is upgraded every 30 seconds

@@ -21,6 +21,8 @@ public class PipeObstacle_Script : MonoBehaviour
     public AudioClip Point;
     private AudioSource ref_audioSource_point;
 
+    //reference to the game Master
+    public FB_GameMaster refGameMaster;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +57,15 @@ public class PipeObstacle_Script : MonoBehaviour
     public void gameOver()
     {
         GameOver = true;
+    }
+
+    public bool getEasterEgg()
+    {
+        return refGameMaster.easterEgg;
+    }
+    public void SeteasterEgg()
+    {
+        refGameMaster.easterEgg = true;
     }
 
 }
